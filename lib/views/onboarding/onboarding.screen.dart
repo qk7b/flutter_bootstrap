@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bootstrap_app/providers/repositories.provider.dart';
+import 'package:flutter_bootstrap_app/injection.dart';
 import 'package:flutter_bootstrap_app/router.dart';
+import 'package:flutter_bootstrap_app/services/local_data.service.dart';
 import 'package:flutter_bootstrap_app/views/onboarding/widgets/last_onboarding.widget.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class OnboardingScreen extends ConsumerStatefulWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
-  ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
+class _OnboardingScreenState extends State<OnboardingScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late List<Widget> _tabs = [];
 
   /// Triggerd when the onboarding is completed
   void onFinishOnboarding() async {
-    await ref.read(localDataRepositoryProvider).setOnboardingDone();
-    ref.read(routerProvider).go(appRoutesPath(AppRoute.splash));
+    getIt<LocalDataService>().setOnboardingDone().then((_) {
+      getIt<GoRouter>().goAppRoute(AppRoute.splash);
+    });
   }
 
   @override

@@ -6,8 +6,16 @@ targets:
         generate_for:
           exclude:
             - test
-          include:
-            - lib/models/**.dart
       json_serializable:
         options:
           explicit_to_json: true
+      flutter_gen_runner:
+        enabled: true
+        options:
+          output: lib/gen/ 
+          line_length: 80 
+          integrations:
+            flutter_svg: true
+          assets:
+            exclude:
+              - assets/i18n/*

@@ -1,6 +1,25 @@
 {
   "files.exclude": {
-    "**/*.freezed.dart": true,
-    "**/*.g.dart": true
-  }
+    "**/.dart_tool/": true,
+    "**/.idea/": true,
+    "**/build/": true,
+    "**/*.g.dart": true,
+    "**/*.freezed.dart": true
+  },
+  "search.exclude": {
+    "**/.dart_tool/": true,
+    "**/build/": true,
+    "**/*.g.dart": true,
+    "**/*.gr.dart": true,
+    "**/*.freezed.dart": true
+  },
+  "dart.analysisExcludedFolders": [
+    "**/.dart_tool",
+    "**/build"
+  ],
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.32.7"
 }

@@ -20,7 +20,7 @@ Here is the list of all dependencies that are preconfigures for the project and 
 
 ### Dependencies
 
-- **State Management** by [Riverpod](https://pub.dev/packages/riverpod)
+- **State Management** by [BLoC and Cubit](https://pub.dev/packages/flutter_bloc)
 - **Data classes** by [Freezed](https://pub.dev/packages/freezed)
 - **Routing** by [GoRouter](https://pub.dev/packages/go_router)
 - **Translations** by [Slang](https://pub.dev/packages/slang)
@@ -57,7 +57,7 @@ And the folders
 - [**extensions**](./lib/extensions) contains extensions classes that are usefull. In flutter extensions are a very powerful system that makes it easy to add method to classes without breaking their contracts, so use them as much as you can
 - [**gen**](./lib/gen/) contains generated translations from [Slang](https://pub.dev/packages/slang)
 - [**models**](./lib/models/) contains data classes, almost all of them are [Freezed](https://pub.dev/packages/freezed) classes (or enums)
-- [**providers**](./lib/providers/) contains app wide providers, like current user or theme data, all of them are [Riverpod](https://pub.dev/packages/riverpod) providers.
+- [**managers**](lib/managers/) contains app wide managers, like current user or theme data, all of them are [BLoC](https://pub.dev/packages/flutter_bloc) providers.
 - [**views**](./lib/views/) contains widgets and screens ! Folders are screens splited elements and widget are atomic elements that can be used anywhere in the app
 
 
@@ -71,7 +71,7 @@ File naaming is structued like this : `[snake_case_name].[file_type].dart`.
 
 For example:
 - `user.model.dart` contains the user model class
-- `current_user.provider.dart` contains the provider for the current user
+- `current_user.cubit.dart` contains the manager for the current user
 - `splash.screen.dart` contains the splash screen
 - `user_card.widget.dart` contains a UI widget that displays a card with a user
 - ...
