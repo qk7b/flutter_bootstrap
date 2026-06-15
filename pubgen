@@ -1,0 +1,5 @@
+#!/bin/bash
+# build_runner wrapper for flutter_bootstrap_app
+# Uses forced JIT compilation due to AOT snapshot build incompatibility
+
+dart run build_runner build --force-jit "$@" --delete-conflicting-outputs
