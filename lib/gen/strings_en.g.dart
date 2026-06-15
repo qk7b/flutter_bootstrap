@@ -3,12 +3,13 @@
 ///
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
+// dart format off
 
 part of 'strings.g.dart';
 
 // Path: <root>
 typedef TranslationsEn = Translations; // ignore: unused_element
-class Translations implements BaseTranslations<AppLocale, Translations> {
+class Translations with BaseTranslations<AppLocale, Translations> {
 	/// Returns the current translations of the given [context].
 	///
 	/// Usage:
@@ -39,197 +40,149 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
+
+	/// en: 'Flutter Bootstrap'
 	String get appName => 'Flutter Bootstrap';
-	late final TranslationsErrorsEn errors = TranslationsErrorsEn._(_root);
-	late final TranslationsLoginEn login = TranslationsLoginEn._(_root);
-	late final TranslationsSubscriptionsEn subscriptions = TranslationsSubscriptionsEn._(_root);
-}
 
-// Path: errors
-class TranslationsErrorsEn {
-	TranslationsErrorsEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsErrorsEmailEn email = TranslationsErrorsEmailEn._(_root);
-	late final TranslationsErrorsPasswordEn password = TranslationsErrorsPasswordEn._(_root);
+	late final Translations$login$en login = Translations$login$en._(_root);
+	late final Translations$subscriptions$en subscriptions = Translations$subscriptions$en._(_root);
 }
 
 // Path: login
-class TranslationsLoginEn {
-	TranslationsLoginEn._(this._root);
+class Translations$login$en {
+	Translations$login$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsLoginLoginEn login = TranslationsLoginLoginEn._(_root);
-	late final TranslationsLoginRegisterEn register = TranslationsLoginRegisterEn._(_root);
-}
 
-// Path: purchases
-class TranslationsSubscriptionsEn {
-	TranslationsSubscriptionsEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsSubscriptionsDurationEn duration = TranslationsSubscriptionsDurationEn._(_root);
-	late final TranslationsSubscriptionsPeriodunitEn periodunit = TranslationsSubscriptionsPeriodunitEn._(_root);
-}
-
-// Path: errors.email
-class TranslationsErrorsEmailEn {
-	TranslationsErrorsEmailEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get empty => 'We need your email address';
-	String get invalid => 'It looks like your email address is not valid';
-}
-
-// Path: errors.password
-class TranslationsErrorsPasswordEn {
-	TranslationsErrorsPasswordEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get empty => 'We need your password';
-	String get invalid => 'Your password must be at least 6 characters long';
-}
-
-// Path: login.login
-class TranslationsLoginLoginEn {
-	TranslationsLoginLoginEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
+	/// en: 'Login'
 	String get loginTitle => 'Login';
-	String get email => 'Email';
-	String get password => 'Password';
+
+	/// en: 'Login'
 	String get login => 'Login';
-	String get register => 'Register';
-	String get forgotPassword => 'Forgot your password ?';
-	late final TranslationsLoginLoginSocialsEn socials = TranslationsLoginLoginSocialsEn._(_root);
+
+	late final Translations$login$socials$en socials = Translations$login$socials$en._(_root);
+
+	/// en: 'Continue without account'
+	String get anonymous => 'Continue without account';
 }
 
-// Path: login.register
-class TranslationsLoginRegisterEn {
-	TranslationsLoginRegisterEn._(this._root);
+// Path: subscriptions
+class Translations$subscriptions$en {
+	Translations$subscriptions$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get registerTitle => 'Register';
-	String get email => 'Email';
-	String get password => 'Password';
-	String get confirmPassword => 'Confirm Password';
-	String get register => 'Register';
+	late final Translations$subscriptions$duration$en duration = Translations$subscriptions$duration$en._(_root);
+	late final Translations$subscriptions$periodunit$en periodunit = Translations$subscriptions$periodunit$en._(_root);
 }
 
-// Path: purchases.duration
-class TranslationsSubscriptionsDurationEn {
-	TranslationsSubscriptionsDurationEn._(this._root);
+// Path: login.socials
+class Translations$login$socials$en {
+	Translations$login$socials$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: 'Google'
+	String get google => 'Google';
+
+	/// en: 'Apple'
+	String get apple => 'Apple';
+}
+
+// Path: subscriptions.duration
+class Translations$subscriptions$duration$en {
+	Translations$subscriptions$duration$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Lifetime'
 	String get lifetime => 'Lifetime';
+
+	/// en: 'Every year'
 	String get annual => 'Every year';
+
+	/// en: 'Every 6 months'
 	String get sixMonth => 'Every 6 months';
+
+	/// en: 'Every 3 months'
 	String get threeMonth => 'Every 3 months';
+
+	/// en: 'Every 2 months'
 	String get twoMonth => 'Every 2 months';
+
+	/// en: 'Every month'
 	String get monthly => 'Every month';
+
+	/// en: 'Every week'
 	String get weekly => 'Every week';
 }
 
-// Path: purchases.periodunit
-class TranslationsSubscriptionsPeriodunitEn {
-	TranslationsSubscriptionsPeriodunitEn._(this._root);
+// Path: subscriptions.periodunit
+class Translations$subscriptions$periodunit$en {
+	Translations$subscriptions$periodunit$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: '(one) {Day} (other) {Days}'
 	String day({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Day',
 		other: 'Days',
 	);
+
+	/// en: '(one) {Week} (other) {Weeks}'
 	String week({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Week',
 		other: 'Weeks',
 	);
+
+	/// en: '(one) {Month} (other) {Months}'
 	String month({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Month',
 		other: 'Months',
 	);
+
+	/// en: '(one) {Year} (other) {Years}'
 	String year({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Year',
 		other: 'Years',
 	);
 }
 
-// Path: login.login.socials
-class TranslationsLoginLoginSocialsEn {
-	TranslationsLoginLoginSocialsEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get google => 'Google';
-	String get apple => 'Apple';
-}
-
-/// Flat map(s) containing all translations.
+/// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
+///
+/// The Dart AOT compiler has issues with very large switch statements,
+/// so the map is split into smaller functions (512 entries each).
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
-		switch (path) {
-			case 'appName': return 'Flutter Bootstrap';
-			case 'errors.email.empty': return 'We need your email address';
-			case 'errors.email.invalid': return 'It looks like your email address is not valid';
-			case 'errors.password.empty': return 'We need your password';
-			case 'errors.password.invalid': return 'Your password must be at least 6 characters long';
-			case 'login.login.loginTitle': return 'Login';
-			case 'login.login.email': return 'Email';
-			case 'login.login.password': return 'Password';
-			case 'login.login.login': return 'Login';
-			case 'login.login.register': return 'Register';
-			case 'login.login.forgotPassword': return 'Forgot your password ?';
-			case 'login.login.socials.google': return 'Google';
-			case 'login.login.socials.apple': return 'Apple';
-			case 'login.register.registerTitle': return 'Register';
-			case 'login.register.email': return 'Email';
-			case 'login.register.password': return 'Password';
-			case 'login.register.confirmPassword': return 'Confirm Password';
-			case 'login.register.register': return 'Register';
-			case 'purchases.duration.lifetime': return 'Lifetime';
-			case 'purchases.duration.annual': return 'Every year';
-			case 'purchases.duration.sixMonth': return 'Every 6 months';
-			case 'purchases.duration.threeMonth': return 'Every 3 months';
-			case 'purchases.duration.twoMonth': return 'Every 2 months';
-			case 'purchases.duration.monthly': return 'Every month';
-			case 'purchases.duration.weekly': return 'Every week';
-			case 'purchases.periodunit.day': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-				one: 'Day',
-				other: 'Days',
-			);
-			case 'purchases.periodunit.week': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-				one: 'Week',
-				other: 'Weeks',
-			);
-			case 'purchases.periodunit.month': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-				one: 'Month',
-				other: 'Months',
-			);
-			case 'purchases.periodunit.year': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-				one: 'Year',
-				other: 'Years',
-			);
-			default: return null;
-		}
+		return switch (path) {
+			'appName' => 'Flutter Bootstrap',
+			'login.loginTitle' => 'Login',
+			'login.login' => 'Login',
+			'login.socials.google' => 'Google',
+			'login.socials.apple' => 'Apple',
+			'login.anonymous' => 'Continue without account',
+			'subscriptions.duration.lifetime' => 'Lifetime',
+			'subscriptions.duration.annual' => 'Every year',
+			'subscriptions.duration.sixMonth' => 'Every 6 months',
+			'subscriptions.duration.threeMonth' => 'Every 3 months',
+			'subscriptions.duration.twoMonth' => 'Every 2 months',
+			'subscriptions.duration.monthly' => 'Every month',
+			'subscriptions.duration.weekly' => 'Every week',
+			'subscriptions.periodunit.day' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n, one: 'Day', other: 'Days', ), 
+			'subscriptions.periodunit.week' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n, one: 'Week', other: 'Weeks', ), 
+			'subscriptions.periodunit.month' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n, one: 'Month', other: 'Months', ), 
+			'subscriptions.periodunit.year' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n, one: 'Year', other: 'Years', ), 
+			_ => null,
+		};
 	}
 }
-

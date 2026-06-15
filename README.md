@@ -14,6 +14,12 @@ It has built in dependencies pre configured to handle multiple things
 3. Run `flutter pub get`
 4. You're good to go
 
+## Init firebase project
+
+1. `dart init.dart`
+1. `dart pub global activate flutterfire_cli`
+2. `flutterfire configure`
+
 ## Structure & Dependencies
 
 Here is the list of all dependencies that are preconfigures for the project and the architecture of its folders

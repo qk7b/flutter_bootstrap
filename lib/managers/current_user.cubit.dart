@@ -2,16 +2,14 @@ import 'dart:async';
 
 import 'package:bloc_wrapped_values/bloc_wrapped_values.dart';
 import 'package:flutter_bootstrap_app/models/user.model.dart';
-import 'package:flutter_bootstrap_app/repositories/user.repository.dart';
+import 'package:flutter_bootstrap_app/repositories/user/user.repository.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class CurrentUserCubit extends AsyncValueCubit<User> {
   final UserRepository userRepository;
 
-  CurrentUserCubit({
-    required this.userRepository,
-  });
+  CurrentUserCubit({required this.userRepository});
 
   void load() async {
     emitLoading();
@@ -36,9 +34,9 @@ class CurrentUserCubit extends AsyncValueCubit<User> {
     });
   }
 
-  Future<void> signInWithDiscord() async {
+  Future<void> continueAnonymous() async {
     emitGuarded(() {
-      return userRepository.signInWithSocial(SocialAuthProvider.discord);
+      return userRepository.anonymous();
     });
   }
 

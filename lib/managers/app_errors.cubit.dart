@@ -9,17 +9,15 @@ part 'app_errors.cubit.freezed.dart';
 
 @injectable
 class AppErrorCubit extends Cubit<AppError> {
-  late StreamSubscription<AppEvent> _errorSubscription;
+  late StreamSubscription _errorSubscription;
 
-  AppErrorCubit({
-    required AppEventBus eventBus,
-  }) : super(const AppError.none()) {
+  AppErrorCubit({required AppEventBus eventBus})
+    : super(const AppError.none()) {
     /// Listen for error that are sent from any other cubit
-    _errorSubscription =
-        eventBus.stream.where((e) => e is SomeErrorOccuredAppEvent).listen((e) {
-      final errorEvent = e as SomeErrorOccuredAppEvent;
-      emit(errorEvent.error);
-    });
+    _errorSubscription = eventBus.stream
+        .where((e) => e is _ErrorOccured)
+        .cast<_ErrorOccured>()
+        .listen(emit);
   }
 
   @override
@@ -30,10 +28,7 @@ class AppErrorCubit extends Cubit<AppError> {
 }
 
 @freezed
-class AppError with _$AppError {
-  const factory AppError.none() = NoError;
-
-  const factory AppError.restorePurchaseFailed() = RestorePurchaseFailedError;
-
-  const factory AppError.purchaseFailed() = PurchaseFailedError;
+abstract class AppError with _$AppError {
+  const factory AppError.none() = _NoError;
+  const factory AppError.error(Object error, StackTrace? trace) = _ErrorOccured;
 }

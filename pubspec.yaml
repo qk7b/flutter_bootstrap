@@ -25,6 +25,8 @@ dependencies:
   bloc_wrapped_values: ^1.1.0
   collection: ^1.19.1
   dio: ^5.9.2
+  firebase_auth: ^6.5.2
+  firebase_core: ^4.10.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
@@ -55,6 +57,7 @@ dev_dependencies:
   json_serializable: ^6.13.2
   slang_build_runner: ^4.14.0
   flutter_gen_runner: ^5.14.1
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true

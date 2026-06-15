@@ -55,12 +55,11 @@ extension AppEventPatterns on AppEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UserLoadedAppEvent value)?  userLoaded,TResult Function( PremiumLoadedAppEvent value)?  premiumStatusChanged,TResult Function( SomeErrorOccuredAppEvent value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UserLoadedAppEvent value)?  userLoaded,TResult Function( ErrorOccuredAppEvent value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case UserLoadedAppEvent() when userLoaded != null:
-return userLoaded(_that);case PremiumLoadedAppEvent() when premiumStatusChanged != null:
-return premiumStatusChanged(_that);case SomeErrorOccuredAppEvent() when error != null:
+return userLoaded(_that);case ErrorOccuredAppEvent() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -79,12 +78,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UserLoadedAppEvent value)  userLoaded,required TResult Function( PremiumLoadedAppEvent value)  premiumStatusChanged,required TResult Function( SomeErrorOccuredAppEvent value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UserLoadedAppEvent value)  userLoaded,required TResult Function( ErrorOccuredAppEvent value)  error,}){
 final _that = this;
 switch (_that) {
 case UserLoadedAppEvent():
-return userLoaded(_that);case PremiumLoadedAppEvent():
-return premiumStatusChanged(_that);case SomeErrorOccuredAppEvent():
+return userLoaded(_that);case ErrorOccuredAppEvent():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -102,12 +100,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UserLoadedAppEvent value)?  userLoaded,TResult? Function( PremiumLoadedAppEvent value)?  premiumStatusChanged,TResult? Function( SomeErrorOccuredAppEvent value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UserLoadedAppEvent value)?  userLoaded,TResult? Function( ErrorOccuredAppEvent value)?  error,}){
 final _that = this;
 switch (_that) {
 case UserLoadedAppEvent() when userLoaded != null:
-return userLoaded(_that);case PremiumLoadedAppEvent() when premiumStatusChanged != null:
-return premiumStatusChanged(_that);case SomeErrorOccuredAppEvent() when error != null:
+return userLoaded(_that);case ErrorOccuredAppEvent() when error != null:
 return error(_that);case _:
   return null;
 
@@ -125,11 +122,10 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String userId)?  userLoaded,TResult Function( bool isPremium)?  premiumStatusChanged,TResult Function( AppError error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String userId)?  userLoaded,TResult Function( AppError error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case UserLoadedAppEvent() when userLoaded != null:
-return userLoaded(_that.userId);case PremiumLoadedAppEvent() when premiumStatusChanged != null:
-return premiumStatusChanged(_that.isPremium);case SomeErrorOccuredAppEvent() when error != null:
+return userLoaded(_that.userId);case ErrorOccuredAppEvent() when error != null:
 return error(_that.error);case _:
   return orElse();
 
@@ -148,11 +144,10 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String userId)  userLoaded,required TResult Function( bool isPremium)  premiumStatusChanged,required TResult Function( AppError error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String userId)  userLoaded,required TResult Function( AppError error)  error,}) {final _that = this;
 switch (_that) {
 case UserLoadedAppEvent():
-return userLoaded(_that.userId);case PremiumLoadedAppEvent():
-return premiumStatusChanged(_that.isPremium);case SomeErrorOccuredAppEvent():
+return userLoaded(_that.userId);case ErrorOccuredAppEvent():
 return error(_that.error);case _:
   throw StateError('Unexpected subclass');
 
@@ -170,11 +165,10 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String userId)?  userLoaded,TResult? Function( bool isPremium)?  premiumStatusChanged,TResult? Function( AppError error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String userId)?  userLoaded,TResult? Function( AppError error)?  error,}) {final _that = this;
 switch (_that) {
 case UserLoadedAppEvent() when userLoaded != null:
-return userLoaded(_that.userId);case PremiumLoadedAppEvent() when premiumStatusChanged != null:
-return premiumStatusChanged(_that.isPremium);case SomeErrorOccuredAppEvent() when error != null:
+return userLoaded(_that.userId);case ErrorOccuredAppEvent() when error != null:
 return error(_that.error);case _:
   return null;
 
@@ -252,74 +246,8 @@ as String,
 /// @nodoc
 
 
-class PremiumLoadedAppEvent implements AppEvent {
-  const PremiumLoadedAppEvent(this.isPremium);
-  
-
- final  bool isPremium;
-
-/// Create a copy of AppEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$PremiumLoadedAppEventCopyWith<PremiumLoadedAppEvent> get copyWith => _$PremiumLoadedAppEventCopyWithImpl<PremiumLoadedAppEvent>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PremiumLoadedAppEvent&&(identical(other.isPremium, isPremium) || other.isPremium == isPremium));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,isPremium);
-
-@override
-String toString() {
-  return 'AppEvent.premiumStatusChanged(isPremium: $isPremium)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $PremiumLoadedAppEventCopyWith<$Res> implements $AppEventCopyWith<$Res> {
-  factory $PremiumLoadedAppEventCopyWith(PremiumLoadedAppEvent value, $Res Function(PremiumLoadedAppEvent) _then) = _$PremiumLoadedAppEventCopyWithImpl;
-@useResult
-$Res call({
- bool isPremium
-});
-
-
-
-
-}
-/// @nodoc
-class _$PremiumLoadedAppEventCopyWithImpl<$Res>
-    implements $PremiumLoadedAppEventCopyWith<$Res> {
-  _$PremiumLoadedAppEventCopyWithImpl(this._self, this._then);
-
-  final PremiumLoadedAppEvent _self;
-  final $Res Function(PremiumLoadedAppEvent) _then;
-
-/// Create a copy of AppEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? isPremium = null,}) {
-  return _then(PremiumLoadedAppEvent(
-null == isPremium ? _self.isPremium : isPremium // ignore: cast_nullable_to_non_nullable
-as bool,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class SomeErrorOccuredAppEvent implements AppEvent {
-  const SomeErrorOccuredAppEvent(this.error);
+class ErrorOccuredAppEvent implements AppEvent {
+  const ErrorOccuredAppEvent(this.error);
   
 
  final  AppError error;
@@ -328,13 +256,13 @@ class SomeErrorOccuredAppEvent implements AppEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SomeErrorOccuredAppEventCopyWith<SomeErrorOccuredAppEvent> get copyWith => _$SomeErrorOccuredAppEventCopyWithImpl<SomeErrorOccuredAppEvent>(this, _$identity);
+$ErrorOccuredAppEventCopyWith<ErrorOccuredAppEvent> get copyWith => _$ErrorOccuredAppEventCopyWithImpl<ErrorOccuredAppEvent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SomeErrorOccuredAppEvent&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorOccuredAppEvent&&(identical(other.error, error) || other.error == error));
 }
 
 
@@ -350,8 +278,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $SomeErrorOccuredAppEventCopyWith<$Res> implements $AppEventCopyWith<$Res> {
-  factory $SomeErrorOccuredAppEventCopyWith(SomeErrorOccuredAppEvent value, $Res Function(SomeErrorOccuredAppEvent) _then) = _$SomeErrorOccuredAppEventCopyWithImpl;
+abstract mixin class $ErrorOccuredAppEventCopyWith<$Res> implements $AppEventCopyWith<$Res> {
+  factory $ErrorOccuredAppEventCopyWith(ErrorOccuredAppEvent value, $Res Function(ErrorOccuredAppEvent) _then) = _$ErrorOccuredAppEventCopyWithImpl;
 @useResult
 $Res call({
  AppError error
@@ -362,17 +290,17 @@ $AppErrorCopyWith<$Res> get error;
 
 }
 /// @nodoc
-class _$SomeErrorOccuredAppEventCopyWithImpl<$Res>
-    implements $SomeErrorOccuredAppEventCopyWith<$Res> {
-  _$SomeErrorOccuredAppEventCopyWithImpl(this._self, this._then);
+class _$ErrorOccuredAppEventCopyWithImpl<$Res>
+    implements $ErrorOccuredAppEventCopyWith<$Res> {
+  _$ErrorOccuredAppEventCopyWithImpl(this._self, this._then);
 
-  final SomeErrorOccuredAppEvent _self;
-  final $Res Function(SomeErrorOccuredAppEvent) _then;
+  final ErrorOccuredAppEvent _self;
+  final $Res Function(ErrorOccuredAppEvent) _then;
 
 /// Create a copy of AppEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
-  return _then(SomeErrorOccuredAppEvent(
+  return _then(ErrorOccuredAppEvent(
 null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as AppError,
   ));

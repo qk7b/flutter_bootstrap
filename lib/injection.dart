@@ -9,4 +9,4 @@ final getIt = GetIt.instance;
   // the default method name that will be generated
   preferRelativeImports: true, // default
 )
-Future<void> configureDependencies() async => await getIt.$initGetIt();
+Future<void> configureDependencies() async => getIt.$initGetIt();

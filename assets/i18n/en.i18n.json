@@ -1,35 +1,14 @@
 {
   "appName": "Flutter Bootstrap",
-  "errors": {
-    "email": {
-      "empty": "We need your email address",
-      "invalid": "It looks like your email address is not valid"
-    },
-    "password": {
-      "empty": "We need your password",
-      "invalid": "Your password must be at least 6 characters long"
-    }
-  },
+  "errors": {},
   "login": {
-    "login": {
-      "loginTitle": "Login",
-      "email": "Email",
-      "password": "Password",
-      "login": "Login",
-      "register": "Register",
-      "forgotPassword": "Forgot your password ?",
-      "socials": {
-        "google": "Google",
-        "apple": "Apple"
-      }
+    "loginTitle": "Login",
+    "login": "Login",
+    "socials": {
+      "google": "Google",
+      "apple": "Apple"
     },
-    "register": {
-      "registerTitle": "Register",
-      "email": "Email",
-      "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "register": "Register"
-    }
+    "anonymous": "Continue without account"
   },
   "subscriptions": {
     "duration": {

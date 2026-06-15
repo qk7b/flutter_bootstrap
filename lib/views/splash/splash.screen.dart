@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap_app/injection.dart';
+import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
 import 'package:flutter_bootstrap_app/router.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,23 +13,20 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future(() async {
-      // Check for routing
-      bool onboardingDone = false;
-      // await ref.read(localDataServiceProvider).hasDoneOnboarding();
-      if (!onboardingDone) {
-        getIt<GoRouter>().goAppRoute(AppRoute.onboarding);
-        return;
-      }
+    return Scaffold(
+      body: BlocListener<OnboardingCubit, OnboardingState>(
+        listener: (_, state) {
+          final hasOnboarded = state.hasOnboarded;
 
-      // Check if user connected if needed
+          if (!hasOnboarded) {
+            getIt<GoRouter>().goAppRoute(AppRoute.onboarding);
+            return;
+          }
 
-      // Go to home
-      getIt<GoRouter>().goAppRoute(AppRoute.home);
-    });
-    return const Scaffold(
-      body: Center(
-        child: Text('SplashScreen'),
+          // Go to login
+          getIt<GoRouter>().goAppRoute(AppRoute.login);
+        },
+        child: const Center(child: Text('SplashScreen')),
       ),
     );
   }

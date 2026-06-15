@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bootstrap_app/injection.dart';
-import 'package:flutter_bootstrap_app/router.dart';
-import 'package:flutter_bootstrap_app/services/local_data.service.dart';
 import 'package:flutter_bootstrap_app/views/onboarding/widgets/last_onboarding.widget.dart';
-import 'package:go_router/go_router.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -19,9 +15,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
   /// Triggerd when the onboarding is completed
   void onFinishOnboarding() async {
-    getIt<LocalDataService>().setOnboardingDone().then((_) {
-      getIt<GoRouter>().goAppRoute(AppRoute.splash);
-    });
+    // TODO CUBIT FINISH ONBOARDING
   }
 
   @override

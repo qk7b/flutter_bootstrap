@@ -16,26 +16,26 @@ void main(List<String> args) {
   final pubspec = File('pubspec.yaml');
   pubspec.writeAsStringSync(
     pubspec.readAsStringSync().replaceAll(
-          'name: flutter_bootstrap_app',
-          'name: $flutterPackage',
-        ),
+      'name: flutter_bootstrap_app',
+      'name: $flutterPackage',
+    ),
   );
 
   // Replace name in AndroidManifest.xml
   final androidManifest = File('android/app/src/main/AndroidManifest.xml');
   androidManifest.writeAsStringSync(
     androidManifest.readAsStringSync().replaceAll(
-          'android:label="flutter_bootstrap_app"',
-          'android:label="$flutterPackage"',
-        ),
+      'android:label="flutter_bootstrap_app"',
+      'android:label="$flutterPackage"',
+    ),
   );
   // Replace applicationId in android/app/build.gradle
   final buildGradle = File('android/app/build.gradle');
   buildGradle.writeAsStringSync(
     buildGradle.readAsStringSync().replaceAll(
-          'applicationId "com.example.flutter_bootstrap_app"',
-          'applicationId "$appIdentifier"',
-        ),
+      'applicationId "com.example.flutter_bootstrap_app"',
+      'applicationId "$appIdentifier"',
+    ),
   );
 
   // For ios we need a correct bundle identifier with no _
@@ -57,17 +57,17 @@ void main(List<String> args) {
   final xcodeproj = File('ios/Runner.xcodeproj/project.pbxproj');
   xcodeproj.writeAsStringSync(
     xcodeproj.readAsStringSync().replaceAll(
-          'com.example.flutterBootstrapApp',
-          iosBundle,
-        ),
+      'com.example.flutterBootstrapApp',
+      iosBundle,
+    ),
   );
   // And in info.plist
   final infoPlist = File('ios/Runner/Info.plist');
   infoPlist.writeAsStringSync(
     infoPlist.readAsStringSync().replaceAll(
-          'com.example.flutterBootstrapApp',
-          iosBundle,
-        ),
+      'com.example.flutterBootstrapApp',
+      iosBundle,
+    ),
   );
 
   // Replace name in all dart files
@@ -78,9 +78,9 @@ void main(List<String> args) {
   for (final file in files) {
     file.writeAsStringSync(
       file.readAsStringSync().replaceAll(
-            'flutter_bootstrap_app',
-            flutterPackage,
-          ),
+        'flutter_bootstrap_app',
+        flutterPackage,
+      ),
     );
   }
 
@@ -88,9 +88,9 @@ void main(List<String> args) {
   final launchJson = File('.vscode/launch.json');
   launchJson.writeAsStringSync(
     launchJson.readAsStringSync().replaceAll(
-          'flutter_bootstrap_app',
-          flutterPackage,
-        ),
+      'flutter_bootstrap_app',
+      flutterPackage,
+    ),
   );
 
   // And in assets/i18n/*.json
@@ -100,10 +100,7 @@ void main(List<String> args) {
       .where((file) => file.path.endsWith('.json'));
   for (final file in i18n) {
     file.writeAsStringSync(
-      file.readAsStringSync().replaceAll(
-            'Flutter Bootstrap',
-            flutterPackage,
-          ),
+      file.readAsStringSync().replaceAll('Flutter Bootstrap', flutterPackage),
     );
   }
 
@@ -111,7 +108,7 @@ void main(List<String> args) {
   stdout.writeln('Would you like to run pub get? (y/n)');
   final answer = stdin.readLineSync();
   if (answer == 'y') {
-    Process.runSync('flutter', ['pub', 'get']);
+    Process.runSync('dart', ['pub', 'get']);
   }
 
   stdout.writeln('Would you like to run pub run build_runner build? (y/n)');
@@ -120,12 +117,15 @@ void main(List<String> args) {
     Process.runSync('dart', ['pub', 'run', 'build_runner', 'build']);
   }
 
-  // Add web support ?
-  stdout.writeln('Would you like to add web support? (y/n)');
-  final answer3 = stdin.readLineSync();
-  if (answer3 == 'y') {
-    Process.runSync('flutter', ['create', '--platforms', 'web', '.']);
-  }
+  final gitignore = File('.gitignore');
+  gitignore.writeAsStringSync(
+    gitignore
+        .readAsStringSync()
+        .replaceAll('firebase.json', '')
+        .replaceAll('ios/Runner/GoogleService-Info.plist', '')
+        .replaceAll('android/app/google-services.json', '')
+        .replaceAll('lib/firebase_options.dart', ''),
+  );
 
   stdout.writeln('Bye !');
 }

@@ -55,13 +55,12 @@ extension AppErrorPatterns on AppError {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( NoError value)?  none,TResult Function( RestorePurchaseFailedError value)?  restorePurchaseFailed,TResult Function( PurchaseFailedError value)?  purchaseFailed,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _NoError value)?  none,TResult Function( _ErrorOccured value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case NoError() when none != null:
-return none(_that);case RestorePurchaseFailedError() when restorePurchaseFailed != null:
-return restorePurchaseFailed(_that);case PurchaseFailedError() when purchaseFailed != null:
-return purchaseFailed(_that);case _:
+case _NoError() when none != null:
+return none(_that);case _ErrorOccured() when error != null:
+return error(_that);case _:
   return orElse();
 
 }
@@ -79,13 +78,12 @@ return purchaseFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( NoError value)  none,required TResult Function( RestorePurchaseFailedError value)  restorePurchaseFailed,required TResult Function( PurchaseFailedError value)  purchaseFailed,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _NoError value)  none,required TResult Function( _ErrorOccured value)  error,}){
 final _that = this;
 switch (_that) {
-case NoError():
-return none(_that);case RestorePurchaseFailedError():
-return restorePurchaseFailed(_that);case PurchaseFailedError():
-return purchaseFailed(_that);case _:
+case _NoError():
+return none(_that);case _ErrorOccured():
+return error(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +100,12 @@ return purchaseFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( NoError value)?  none,TResult? Function( RestorePurchaseFailedError value)?  restorePurchaseFailed,TResult? Function( PurchaseFailedError value)?  purchaseFailed,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _NoError value)?  none,TResult? Function( _ErrorOccured value)?  error,}){
 final _that = this;
 switch (_that) {
-case NoError() when none != null:
-return none(_that);case RestorePurchaseFailedError() when restorePurchaseFailed != null:
-return restorePurchaseFailed(_that);case PurchaseFailedError() when purchaseFailed != null:
-return purchaseFailed(_that);case _:
+case _NoError() when none != null:
+return none(_that);case _ErrorOccured() when error != null:
+return error(_that);case _:
   return null;
 
 }
@@ -125,12 +122,11 @@ return purchaseFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  none,TResult Function()?  restorePurchaseFailed,TResult Function()?  purchaseFailed,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  none,TResult Function( Object error,  StackTrace? trace)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case NoError() when none != null:
-return none();case RestorePurchaseFailedError() when restorePurchaseFailed != null:
-return restorePurchaseFailed();case PurchaseFailedError() when purchaseFailed != null:
-return purchaseFailed();case _:
+case _NoError() when none != null:
+return none();case _ErrorOccured() when error != null:
+return error(_that.error,_that.trace);case _:
   return orElse();
 
 }
@@ -148,12 +144,11 @@ return purchaseFailed();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  none,required TResult Function()  restorePurchaseFailed,required TResult Function()  purchaseFailed,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  none,required TResult Function( Object error,  StackTrace? trace)  error,}) {final _that = this;
 switch (_that) {
-case NoError():
-return none();case RestorePurchaseFailedError():
-return restorePurchaseFailed();case PurchaseFailedError():
-return purchaseFailed();case _:
+case _NoError():
+return none();case _ErrorOccured():
+return error(_that.error,_that.trace);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +165,11 @@ return purchaseFailed();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  none,TResult? Function()?  restorePurchaseFailed,TResult? Function()?  purchaseFailed,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  none,TResult? Function( Object error,  StackTrace? trace)?  error,}) {final _that = this;
 switch (_that) {
-case NoError() when none != null:
-return none();case RestorePurchaseFailedError() when restorePurchaseFailed != null:
-return restorePurchaseFailed();case PurchaseFailedError() when purchaseFailed != null:
-return purchaseFailed();case _:
+case _NoError() when none != null:
+return none();case _ErrorOccured() when error != null:
+return error(_that.error,_that.trace);case _:
   return null;
 
 }
@@ -186,8 +180,8 @@ return purchaseFailed();case _:
 /// @nodoc
 
 
-class NoError implements AppError {
-  const NoError();
+class _NoError implements AppError {
+  const _NoError();
   
 
 
@@ -197,7 +191,7 @@ class NoError implements AppError {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NoError);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NoError);
 }
 
 
@@ -218,65 +212,68 @@ String toString() {
 /// @nodoc
 
 
-class RestorePurchaseFailedError implements AppError {
-  const RestorePurchaseFailedError();
+class _ErrorOccured implements AppError {
+  const _ErrorOccured(this.error, this.trace);
   
 
+ final  Object error;
+ final  StackTrace? trace;
 
-
+/// Create a copy of AppError
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorOccuredCopyWith<_ErrorOccured> get copyWith => __$ErrorOccuredCopyWithImpl<_ErrorOccured>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RestorePurchaseFailedError);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ErrorOccured&&const DeepCollectionEquality().equals(other.error, error)&&(identical(other.trace, trace) || other.trace == trace));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(error),trace);
 
 @override
 String toString() {
-  return 'AppError.restorePurchaseFailed()';
+  return 'AppError.error(error: $error, trace: $trace)';
 }
 
 
 }
-
-
-
 
 /// @nodoc
+abstract mixin class _$ErrorOccuredCopyWith<$Res> implements $AppErrorCopyWith<$Res> {
+  factory _$ErrorOccuredCopyWith(_ErrorOccured value, $Res Function(_ErrorOccured) _then) = __$ErrorOccuredCopyWithImpl;
+@useResult
+$Res call({
+ Object error, StackTrace? trace
+});
 
 
-class PurchaseFailedError implements AppError {
-  const PurchaseFailedError();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseFailedError);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'AppError.purchaseFailed()';
-}
 
 
 }
+/// @nodoc
+class __$ErrorOccuredCopyWithImpl<$Res>
+    implements _$ErrorOccuredCopyWith<$Res> {
+  __$ErrorOccuredCopyWithImpl(this._self, this._then);
+
+  final _ErrorOccured _self;
+  final $Res Function(_ErrorOccured) _then;
+
+/// Create a copy of AppError
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = null,Object? trace = freezed,}) {
+  return _then(_ErrorOccured(
+null == error ? _self.error : error ,freezed == trace ? _self.trace : trace // ignore: cast_nullable_to_non_nullable
+as StackTrace?,
+  ));
+}
 
 
-
+}
 
 // dart format on

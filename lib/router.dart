@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_app/views/home/home.screen.dart';
 import 'package:flutter_bootstrap_app/views/login/login.screen.dart';
 import 'package:flutter_bootstrap_app/views/onboarding/onboarding.screen.dart';
-import 'package:flutter_bootstrap_app/views/purchases/subscriptions.screen.dart';
+import 'package:flutter_bootstrap_app/views/paywall/paywall.screen.dart';
 import 'package:flutter_bootstrap_app/views/splash/splash.screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
@@ -78,7 +78,7 @@ abstract class RouterProvider {
           GoRoute(
             path: appRoutesPath(AppRoute.purchases),
             pageBuilder: (context, state) => const MaterialPage(
-              child: PurchasesScreen(),
+              child: PayWallScreen(),
             ),
           ),
         ],
