@@ -36,6 +36,7 @@ dependencies:
   freezed_annotation: ^3.1.0
   get_it: ^9.2.1
   go_router: ^17.2.3
+  google_sign_in: ^7.2.0
   hydrated_bloc: ^11.0.0
   injectable: ^3.0.0
   intl: ^0.20.2
@@ -44,6 +45,7 @@ dependencies:
   path_provider: ^2.1.5
   purchases_flutter: ^10.0.1
   shared_preferences: ^2.5.5
+  sign_in_with_apple: ^7.0.1
   slang: ^4.14.0
   slang_flutter: ^4.14.0
   toastification: ^3.2.0

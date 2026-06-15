@@ -16,8 +16,8 @@ abstract class UserRepository {
   /// Signs out the current user
   Future<void> signOut();
 
-  /// Returns the current user if signed in, null otherwise
-  Future<User> getCurrentUser();
+  /// Emits the current user whenever the authentication state changes
+  Stream<User?> get userStream;
 
   /// Deletes the current user
   Future<void> deleteAccount();

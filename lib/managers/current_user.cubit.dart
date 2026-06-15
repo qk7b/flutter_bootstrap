@@ -8,18 +8,22 @@ import 'package:injectable/injectable.dart';
 @injectable
 class CurrentUserCubit extends AsyncValueCubit<User> {
   final UserRepository userRepository;
+  StreamSubscription<User?>? _userSubscription;
 
-  CurrentUserCubit({required this.userRepository});
+  CurrentUserCubit({required this.userRepository}) {
+    _userSubscription = userRepository.userStream.listen((user) {
+      if (user != null) {
+        emitSuccess(user);
+      } else {
+        emit(AsyncValueWrapper<User>.initial());
+      }
+    });
+  }
 
-  void load() async {
-    emitLoading();
-    try {
-      final user = await userRepository.getCurrentUser();
-      emitSuccess(user);
-    } catch (e) {
-      // No error here but initial value
-      emit(AsyncValueWrapper<User>.initial());
-    }
+  @override
+  Future<void> close() {
+    _userSubscription?.cancel();
+    return super.close();
   }
 
   void signInWithGoogle() async {

@@ -13,8 +13,12 @@ import 'package:flutter_bootstrap_app/managers/app_settings.cubit.dart';
 import 'package:flutter_bootstrap_app/managers/current_user.cubit.dart';
 import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
 import 'package:flutter_bootstrap_app/managers/purchases_cubit.dart';
+import 'package:flutter_bootstrap_app/views/home/home.screen.dart';
+import 'package:flutter_bootstrap_app/views/login/login.screen.dart';
+import 'package:flutter_bootstrap_app/views/onboarding/onboarding.screen.dart';
+import 'package:flutter_bootstrap_app/views/paywall/paywall.screen.dart';
+import 'package:flutter_bootstrap_app/views/splash/splash.screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:logger/logger.dart';
@@ -22,7 +26,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:toastification/toastification.dart';
 
-final sl = GetIt.instance;
+part 'router.dart';
+
 
 void main() async {
   // Init
@@ -108,7 +113,7 @@ class MyApp extends StatelessWidget {
               locale: TranslationProvider.of(context).flutterLocale,
               supportedLocales: AppLocaleUtils.supportedLocales,
               localizationsDelegates: GlobalMaterialLocalizations.delegates,
-              routerConfig: getIt<GoRouter>(),
+              routerConfig: _router,
             ),
           );
         },

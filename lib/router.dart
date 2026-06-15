@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bootstrap_app/views/home/home.screen.dart';
-import 'package:flutter_bootstrap_app/views/login/login.screen.dart';
-import 'package:flutter_bootstrap_app/views/onboarding/onboarding.screen.dart';
-import 'package:flutter_bootstrap_app/views/paywall/paywall.screen.dart';
-import 'package:flutter_bootstrap_app/views/splash/splash.screen.dart';
-import 'package:go_router/go_router.dart';
-import 'package:injectable/injectable.dart';
+part of 'main.dart';
 
 enum AppRoute {
   splash,
@@ -29,7 +22,7 @@ String appRoutesPath(AppRoute route, {String? id = ':id'}) => switch (route) {
 /// This extension is used to navigate to the app routes
 /// It prevens using go and push directy and navigation
 /// to the app routes is only made using the [AppRoute] enum
-extension NavigationEnum on GoRouter {
+extension NavigationEnum on BuildContext {
   void goAppRoute<T>(AppRoute route, {String? id, Object? extra}) =>
       go(appRoutesPath(route, id: id), extra: extra);
 
@@ -37,9 +30,8 @@ extension NavigationEnum on GoRouter {
       push(appRoutesPath(route, id: id), extra: extra);
 }
 
-abstract class RouterProvider {
-  @singleton
-  GoRouter router() => GoRouter(
+
+final _router = GoRouter(
         initialLocation: appRoutesPath(AppRoute.splash),
         redirect: (context, state) {
           final pageName = state.name;
@@ -83,4 +75,3 @@ abstract class RouterProvider {
           ),
         ],
       );
-}
