@@ -7,9 +7,6 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class CurrentUserCubit extends AsyncValueCubit<User> {
-  final UserRepository userRepository;
-  StreamSubscription<User?>? _userSubscription;
-
   CurrentUserCubit({required this.userRepository}) {
     _userSubscription = userRepository.userStream.listen((user) {
       if (user != null) {
@@ -19,12 +16,9 @@ class CurrentUserCubit extends AsyncValueCubit<User> {
       }
     });
   }
-
-  @override
-  Future<void> close() {
-    _userSubscription?.cancel();
-    return super.close();
-  }
+  
+  final UserRepository userRepository;
+  StreamSubscription<User?>? _userSubscription;
 
   void signInWithGoogle() async {
     emitGuarded(() {
@@ -52,5 +46,11 @@ class CurrentUserCubit extends AsyncValueCubit<User> {
     } catch (e) {
       emitError(e);
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await _userSubscription?.cancel();
+    return super.close();
   }
 }

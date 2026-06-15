@@ -7,8 +7,8 @@
     "loginTitle": "Connexion",
     "login": "Connexion",
     "socials": {
-      "google": "Google",
-      "apple": "Apple"
+      "google": "Continuer avec Google",
+      "apple": "Continuer avec Apple"
     },
     "anonymous": "Continuer sans compte"
   },

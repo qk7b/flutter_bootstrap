@@ -73,8 +73,8 @@ class _Translations$login$socials$fr implements Translations$login$socials$en {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get google => 'Google';
-	@override String get apple => 'Apple';
+	@override String get google => 'Continuer avec Google';
+	@override String get apple => 'Continuer avec Apple';
 }
 
 // Path: subscriptions.duration
@@ -129,8 +129,8 @@ extension on TranslationsFr {
 			'appName' => 'Flutter Bootstrap',
 			'login.loginTitle' => 'Connexion',
 			'login.login' => 'Connexion',
-			'login.socials.google' => 'Google',
-			'login.socials.apple' => 'Apple',
+			'login.socials.google' => 'Continuer avec Google',
+			'login.socials.apple' => 'Continuer avec Apple',
 			'login.anonymous' => 'Continuer sans compte',
 			'subscriptions.duration.lifetime' => 'A vie',
 			'subscriptions.duration.annual' => 'Tous les year',

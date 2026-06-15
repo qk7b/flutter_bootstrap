@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_wrapped_values/bloc_wrapped_values.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,9 +15,15 @@ part 'purchases_cubit.state.dart';
 @injectable
 class PurchasesCubit extends Cubit<PurchasesState> {
   PurchasesCubit({required this.eventBus})
-    : super(PurchasesState(offerings: AsyncValueWrapper.initial()));
+    : super(PurchasesState(offerings: AsyncValueWrapper.initial())) {
+    userLoginSubscription = eventBus.stream
+        .where((e) => e is UserLoadedAppEvent)
+        .cast<UserLoadedAppEvent>()
+        .listen((e) => identifyUser(e.userId));
+  }
 
   final AppEventBus eventBus;
+  StreamSubscription? userLoginSubscription;
 
   void identifyUser(String userId) {
     Purchases.logIn(userId).then((ci) => _loadEntitlements(ci.customerInfo));
@@ -71,5 +79,11 @@ class PurchasesCubit extends Cubit<PurchasesState> {
 
   void _loadEntitlements(CustomerInfo info) {
     emit(state.copyWith(activeEntitlements: info.entitlements.active));
+  }
+
+  @override
+  Future<void> close() async {
+    await userLoginSubscription?.cancel();
+    return super.close();
   }
 }

@@ -3,8 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap_app/main.dart';
 import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() => SplasScreenState();
+}
+
+class SplasScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<OnboardingCubit>().trigger();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

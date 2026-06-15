@@ -5,8 +5,8 @@
     "loginTitle": "Login",
     "login": "Login",
     "socials": {
-      "google": "Google",
-      "apple": "Apple"
+      "google": "Continue with Google",
+      "apple": "Continue with Apple"
     },
     "anonymous": "Continue without account"
   },

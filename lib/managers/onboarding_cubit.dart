@@ -13,6 +13,14 @@ class OnboardingCubit extends HydratedCubit<OnboardingState> {
   @override
   String get storagePrefix => 'onboarding';
 
+  void trigger() {
+    emit(state.copyWith(loadedAt: DateTime.now()));
+  }
+
+  void setOnboardingDone() {
+    emit(state.copyWith(hasOnboarded: true, updatedAt: DateTime.now()));
+  }
+
   @override
   OnboardingState? fromJson(Map<String, dynamic> json) =>
       OnboardingState.fromJson(json);

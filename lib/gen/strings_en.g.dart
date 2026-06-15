@@ -87,11 +87,11 @@ class Translations$login$socials$en {
 
 	// Translations
 
-	/// en: 'Google'
-	String get google => 'Google';
+	/// en: 'Continue with Google'
+	String get google => 'Continue with Google';
 
-	/// en: 'Apple'
-	String get apple => 'Apple';
+	/// en: 'Continue with Apple'
+	String get apple => 'Continue with Apple';
 }
 
 // Path: subscriptions.duration
@@ -168,8 +168,8 @@ extension on Translations {
 			'appName' => 'Flutter Bootstrap',
 			'login.loginTitle' => 'Login',
 			'login.login' => 'Login',
-			'login.socials.google' => 'Google',
-			'login.socials.apple' => 'Apple',
+			'login.socials.google' => 'Continue with Google',
+			'login.socials.apple' => 'Continue with Apple',
 			'login.anonymous' => 'Continue without account',
 			'subscriptions.duration.lifetime' => 'Lifetime',
 			'subscriptions.duration.annual' => 'Every year',
