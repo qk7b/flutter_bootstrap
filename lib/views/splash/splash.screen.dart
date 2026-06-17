@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bootstrap_app/injection.dart';
-import 'package:flutter_bootstrap_app/router.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bootstrap_app/main.dart';
+import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
 
-/// [SplashScreen] is the first screen shown to the user
-/// it handles app initialization and routing to basics screens like
-/// [OnboardingScreen], [HomeScreen] or even if needed [LoginScreen]
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Future(() async {
-      // Check for routing
-      bool onboardingDone = false;
-      // await ref.read(localDataServiceProvider).hasDoneOnboarding();
-      if (!onboardingDone) {
-        getIt<GoRouter>().goAppRoute(AppRoute.onboarding);
-        return;
-      }
+  State<StatefulWidget> createState() => SplasScreenState();
+}
 
-      // Check if user connected if needed
-
-      // Go to home
-      getIt<GoRouter>().goAppRoute(AppRoute.home);
+class SplasScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<OnboardingCubit>().trigger();
     });
-    return const Scaffold(
-      body: Center(
-        child: Text('SplashScreen'),
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocListener<OnboardingCubit, OnboardingState>(
+        listener: (_, state) {
+          if (state.hasOnboarded) {
+            context.goAppRoute(AppRoute.login);
+            return;
+          }
+
+          // Go to onboarding
+          context.goAppRoute(AppRoute.onboarding);
+        },
+        child: const Center(child: Text('SplashScreen')),
       ),
     );
   }

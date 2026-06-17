@@ -51,7 +51,3 @@ linter:
     prefer_if_elements_to_conditional_expressions: false
     overridden_fields: false
     require_trailing_commas: true
-
-    strong-mode:
-      implicit-casts: false
-      implicit-dynamic: false

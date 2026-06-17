@@ -1,17 +1,24 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bootstrap_app/firebase_options.dart';
 import 'package:flutter_bootstrap_app/gen/strings.g.dart';
 import 'package:flutter_bootstrap_app/injection.dart';
 import 'package:flutter_bootstrap_app/logger.dart';
 import 'package:flutter_bootstrap_app/managers/app_errors.cubit.dart';
 import 'package:flutter_bootstrap_app/managers/app_settings.cubit.dart';
 import 'package:flutter_bootstrap_app/managers/current_user.cubit.dart';
-import 'package:flutter_bootstrap_app/managers/offerings_cubit.dart';
+import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
+import 'package:flutter_bootstrap_app/managers/purchases_cubit.dart';
+import 'package:flutter_bootstrap_app/views/home/home.screen.dart';
+import 'package:flutter_bootstrap_app/views/login/login.screen.dart';
+import 'package:flutter_bootstrap_app/views/onboarding/onboarding.screen.dart';
+import 'package:flutter_bootstrap_app/views/paywall/paywall.screen.dart';
+import 'package:flutter_bootstrap_app/views/splash/splash.screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:logger/logger.dart';
@@ -19,7 +26,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:toastification/toastification.dart';
 
-final sl = GetIt.instance;
+part 'router.dart';
+
 
 void main() async {
   // Init
@@ -35,6 +43,8 @@ void main() async {
             (await getApplicationSupportDirectory()).path,
           ),
   );
+  // Firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // Injection
   await configureDependencies();
   // Payment provider
@@ -51,16 +61,13 @@ Future<void> initPaymentProvider() async {
 
   /// Init revenuecat
   await Purchases.setLogHandler(
-    (level, message) => logger.log(
-      switch (level) {
-        LogLevel.verbose => Level.all,
-        LogLevel.debug => Level.debug,
-        LogLevel.info => Level.info,
-        LogLevel.warn => Level.warning,
-        LogLevel.error => Level.error,
-      },
-      message,
-    ),
+    (level, message) => logger.log(switch (level) {
+      LogLevel.verbose => Level.all,
+      LogLevel.debug => Level.debug,
+      LogLevel.info => Level.info,
+      LogLevel.warn => Level.warning,
+      LogLevel.error => Level.error,
+    }, message),
   );
   final currentPlatform = Platform.operatingSystem;
   PurchasesConfiguration configuration = PurchasesConfiguration(
@@ -89,7 +96,8 @@ class MyApp extends StatelessWidget {
         BlocProvider.value(value: getIt<AppErrorCubit>()),
         BlocProvider.value(value: getIt<AppSettingsCubit>()),
         BlocProvider.value(value: getIt<CurrentUserCubit>()),
-        BlocProvider.value(value: getIt<OfferingsCubit>()),
+        BlocProvider.value(value: getIt<PurchasesCubit>()),
+        BlocProvider.value(value: getIt<OnboardingCubit>()),
       ],
       child: Builder(
         builder: (context) {
@@ -98,16 +106,14 @@ class MyApp extends StatelessWidget {
               if (appError == const AppError.none()) return;
               toastification.show(
                 context: context,
-                title: Text(
-                  appError.toString(),
-                ),
+                title: Text(appError.toString()),
               );
             },
             child: MaterialApp.router(
               locale: TranslationProvider.of(context).flutterLocale,
               supportedLocales: AppLocaleUtils.supportedLocales,
               localizationsDelegates: GlobalMaterialLocalizations.delegates,
-              routerConfig: getIt<GoRouter>(),
+              routerConfig: _router,
             ),
           );
         },

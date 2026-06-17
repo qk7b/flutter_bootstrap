@@ -19,8 +19,5 @@ class AppEventBus {
 class AppEvent with _$AppEvent {
   const factory AppEvent.userLoaded(String userId) = UserLoadedAppEvent;
 
-  const factory AppEvent.premiumStatusChanged(bool isPremium) =
-      PremiumLoadedAppEvent;
-
-  const factory AppEvent.error(AppError error) = SomeErrorOccuredAppEvent;
+  const factory AppEvent.error(AppError error) = ErrorOccuredAppEvent;
 }

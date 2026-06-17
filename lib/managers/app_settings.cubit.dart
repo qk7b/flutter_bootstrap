@@ -10,32 +10,24 @@ class AppSettingsCubit extends HydratedCubit<AppSettingsState> {
   AppSettingsCubit() : super(const AppSettingsState());
 
   void setTheme(AppTheme theme) {
-    emit(
-      state.copyWith(
-        theme: theme,
-      ),
-    );
+    emit(state.copyWith(theme: theme));
   }
 
   @override
   String get storagePrefix => 'app_settings';
 
   @override
-  AppSettingsState? fromJson(Map<String, dynamic> json) {
-    return AppSettingsState.fromJson(json);
-  }
+  AppSettingsState? fromJson(Map<String, dynamic> json) =>
+      AppSettingsState.fromJson(json);
 
   @override
-  Map<String, dynamic>? toJson(AppSettingsState state) {
-    return state.toJson();
-  }
+  Map<String, dynamic>? toJson(AppSettingsState state) => state.toJson();
 }
 
 @freezed
-class AppSettingsState with _$AppSettingsState {
-  const factory AppSettingsState({
-    @Default(AppTheme.system) AppTheme theme,
-  }) = _AppSettingsState;
+abstract class AppSettingsState with _$AppSettingsState {
+  const factory AppSettingsState({@Default(AppTheme.system) AppTheme theme}) =
+      _AppSettingsState;
 
   factory AppSettingsState.fromJson(Map<String, Object?> json) =>
       _$AppSettingsStateFromJson(json);
@@ -47,5 +39,5 @@ enum AppTheme {
   @JsonValue('dark')
   dark,
   @JsonValue('light')
-  light;
+  light,
 }

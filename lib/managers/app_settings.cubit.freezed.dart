@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,159 +9,269 @@ part of 'app_settings.cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-AppSettingsState _$AppSettingsStateFromJson(Map<String, dynamic> json) {
-  return _AppSettingsState.fromJson(json);
-}
 
 /// @nodoc
 mixin _$AppSettingsState {
-  AppTheme get theme => throw _privateConstructorUsedError;
+
+ AppTheme get theme;
+/// Create a copy of AppSettingsState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AppSettingsStateCopyWith<AppSettingsState> get copyWith => _$AppSettingsStateCopyWithImpl<AppSettingsState>(this as AppSettingsState, _$identity);
 
   /// Serializes this AppSettingsState to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of AppSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppSettingsStateCopyWith<AppSettingsState> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettingsState&&(identical(other.theme, theme) || other.theme == theme));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,theme);
+
+@override
+String toString() {
+  return 'AppSettingsState(theme: $theme)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $AppSettingsStateCopyWith<$Res> {
-  factory $AppSettingsStateCopyWith(
-          AppSettingsState value, $Res Function(AppSettingsState) then) =
-      _$AppSettingsStateCopyWithImpl<$Res, AppSettingsState>;
-  @useResult
-  $Res call({AppTheme theme});
-}
+abstract mixin class $AppSettingsStateCopyWith<$Res>  {
+  factory $AppSettingsStateCopyWith(AppSettingsState value, $Res Function(AppSettingsState) _then) = _$AppSettingsStateCopyWithImpl;
+@useResult
+$Res call({
+ AppTheme theme
+});
 
+
+
+
+}
 /// @nodoc
-class _$AppSettingsStateCopyWithImpl<$Res, $Val extends AppSettingsState>
+class _$AppSettingsStateCopyWithImpl<$Res>
     implements $AppSettingsStateCopyWith<$Res> {
-  _$AppSettingsStateCopyWithImpl(this._value, this._then);
+  _$AppSettingsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final AppSettingsState _self;
+  final $Res Function(AppSettingsState) _then;
 
-  /// Create a copy of AppSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? theme = null,
-  }) {
-    return _then(_value.copyWith(
-      theme: null == theme
-          ? _value.theme
-          : theme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
-    ) as $Val);
-  }
+/// Create a copy of AppSettingsState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? theme = null,}) {
+  return _then(_self.copyWith(
+theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
+as AppTheme,
+  ));
 }
 
-/// @nodoc
-abstract class _$$AppSettingsStateImplCopyWith<$Res>
-    implements $AppSettingsStateCopyWith<$Res> {
-  factory _$$AppSettingsStateImplCopyWith(_$AppSettingsStateImpl value,
-          $Res Function(_$AppSettingsStateImpl) then) =
-      __$$AppSettingsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({AppTheme theme});
 }
 
-/// @nodoc
-class __$$AppSettingsStateImplCopyWithImpl<$Res>
-    extends _$AppSettingsStateCopyWithImpl<$Res, _$AppSettingsStateImpl>
-    implements _$$AppSettingsStateImplCopyWith<$Res> {
-  __$$AppSettingsStateImplCopyWithImpl(_$AppSettingsStateImpl _value,
-      $Res Function(_$AppSettingsStateImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of AppSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? theme = null,
-  }) {
-    return _then(_$AppSettingsStateImpl(
-      theme: null == theme
-          ? _value.theme
-          : theme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
-    ));
-  }
+/// Adds pattern-matching-related methods to [AppSettingsState].
+extension AppSettingsStatePatterns on AppSettingsState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AppSettingsState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AppSettingsState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AppSettingsState value)  $default,){
+final _that = this;
+switch (_that) {
+case _AppSettingsState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AppSettingsState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _AppSettingsState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AppTheme theme)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AppSettingsState() when $default != null:
+return $default(_that.theme);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AppTheme theme)  $default,) {final _that = this;
+switch (_that) {
+case _AppSettingsState():
+return $default(_that.theme);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AppTheme theme)?  $default,) {final _that = this;
+switch (_that) {
+case _AppSettingsState() when $default != null:
+return $default(_that.theme);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$AppSettingsStateImpl implements _AppSettingsState {
-  const _$AppSettingsStateImpl({this.theme = AppTheme.system});
 
-  factory _$AppSettingsStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AppSettingsStateImplFromJson(json);
+class _AppSettingsState implements AppSettingsState {
+  const _AppSettingsState({this.theme = AppTheme.system});
+  factory _AppSettingsState.fromJson(Map<String, dynamic> json) => _$AppSettingsStateFromJson(json);
 
-  @override
-  @JsonKey()
-  final AppTheme theme;
+@override@JsonKey() final  AppTheme theme;
 
-  @override
-  String toString() {
-    return 'AppSettingsState(theme: $theme)';
-  }
+/// Create a copy of AppSettingsState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AppSettingsStateCopyWith<_AppSettingsState> get copyWith => __$AppSettingsStateCopyWithImpl<_AppSettingsState>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AppSettingsStateImpl &&
-            (identical(other.theme, theme) || other.theme == theme));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, theme);
-
-  /// Create a copy of AppSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AppSettingsStateImplCopyWith<_$AppSettingsStateImpl> get copyWith =>
-      __$$AppSettingsStateImplCopyWithImpl<_$AppSettingsStateImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AppSettingsStateImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$AppSettingsStateToJson(this, );
 }
 
-abstract class _AppSettingsState implements AppSettingsState {
-  const factory _AppSettingsState({final AppTheme theme}) =
-      _$AppSettingsStateImpl;
-
-  factory _AppSettingsState.fromJson(Map<String, dynamic> json) =
-      _$AppSettingsStateImpl.fromJson;
-
-  @override
-  AppTheme get theme;
-
-  /// Create a copy of AppSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppSettingsStateImplCopyWith<_$AppSettingsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettingsState&&(identical(other.theme, theme) || other.theme == theme));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,theme);
+
+@override
+String toString() {
+  return 'AppSettingsState(theme: $theme)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AppSettingsStateCopyWith<$Res> implements $AppSettingsStateCopyWith<$Res> {
+  factory _$AppSettingsStateCopyWith(_AppSettingsState value, $Res Function(_AppSettingsState) _then) = __$AppSettingsStateCopyWithImpl;
+@override @useResult
+$Res call({
+ AppTheme theme
+});
+
+
+
+
+}
+/// @nodoc
+class __$AppSettingsStateCopyWithImpl<$Res>
+    implements _$AppSettingsStateCopyWith<$Res> {
+  __$AppSettingsStateCopyWithImpl(this._self, this._then);
+
+  final _AppSettingsState _self;
+  final $Res Function(_AppSettingsState) _then;
+
+/// Create a copy of AppSettingsState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? theme = null,}) {
+  return _then(_AppSettingsState(
+theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
+as AppTheme,
+  ));
+}
+
+
+}
+
+// dart format on

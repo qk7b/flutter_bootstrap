@@ -2,27 +2,23 @@ import 'dart:async';
 
 import 'package:bloc_wrapped_values/bloc_wrapped_values.dart';
 import 'package:flutter_bootstrap_app/models/user.model.dart';
-import 'package:flutter_bootstrap_app/repositories/user.repository.dart';
+import 'package:flutter_bootstrap_app/repositories/user/user.repository.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class CurrentUserCubit extends AsyncValueCubit<User> {
-  final UserRepository userRepository;
-
-  CurrentUserCubit({
-    required this.userRepository,
-  });
-
-  void load() async {
-    emitLoading();
-    try {
-      final user = await userRepository.getCurrentUser();
-      emitSuccess(user);
-    } catch (e) {
-      // No error here but initial value
-      emit(AsyncValueWrapper<User>.initial());
-    }
+  CurrentUserCubit({required this.userRepository}) {
+    _userSubscription = userRepository.userStream.listen((user) {
+      if (user != null) {
+        emitSuccess(user);
+      } else {
+        emit(AsyncValueWrapper<User>.initial());
+      }
+    });
   }
+  
+  final UserRepository userRepository;
+  StreamSubscription<User?>? _userSubscription;
 
   void signInWithGoogle() async {
     emitGuarded(() {
@@ -36,9 +32,9 @@ class CurrentUserCubit extends AsyncValueCubit<User> {
     });
   }
 
-  Future<void> signInWithDiscord() async {
+  Future<void> continueAnonymous() async {
     emitGuarded(() {
-      return userRepository.signInWithSocial(SocialAuthProvider.discord);
+      return userRepository.anonymous();
     });
   }
 
@@ -50,5 +46,11 @@ class CurrentUserCubit extends AsyncValueCubit<User> {
     } catch (e) {
       emitError(e);
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await _userSubscription?.cancel();
+    return super.close();
   }
 }

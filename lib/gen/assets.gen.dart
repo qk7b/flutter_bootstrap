@@ -35,11 +35,11 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-        icAppleSigninDark,
-        icAppleSigninLight,
-        icGoogleSigninDark,
-        icGoogleSigninLight
-      ];
+    icAppleSigninDark,
+    icAppleSigninLight,
+    icGoogleSigninDark,
+    icGoogleSigninLight,
+  ];
 }
 
 class Assets {
@@ -49,17 +49,11 @@ class Assets {
 }
 
 class SvgGenImage {
-  const SvgGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = false;
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = false;
 
-  const SvgGenImage.vec(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = true;
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
@@ -115,7 +109,8 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
+      colorFilter:
+          colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,

@@ -1,27 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bootstrap_app/injection.dart';
-import 'package:flutter_bootstrap_app/router.dart';
-import 'package:flutter_bootstrap_app/services/local_data.service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bootstrap_app/main.dart';
+import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
 import 'package:flutter_bootstrap_app/views/onboarding/widgets/last_onboarding.widget.dart';
-import 'package:go_router/go_router.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  Widget build(BuildContext context) {
+    return BlocListener<OnboardingCubit, OnboardingState>(
+      listener: (_, state) {
+        if (state.hasOnboarded) {
+          context.goAppRoute(AppRoute.login);
+          return;
+        }
+      },
+      child: const _OnboardingScreenContent(),
+    );
+  }
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen>
+class _OnboardingScreenContent extends StatefulWidget {
+  const _OnboardingScreenContent();
+
+  @override
+  State<_OnboardingScreenContent> createState() =>
+      _OnboardingScreenContentState();
+}
+
+class _OnboardingScreenContentState extends State<_OnboardingScreenContent>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late List<Widget> _tabs = [];
 
   /// Triggerd when the onboarding is completed
   void onFinishOnboarding() async {
-    getIt<LocalDataService>().setOnboardingDone().then((_) {
-      getIt<GoRouter>().goAppRoute(AppRoute.splash);
-    });
+    context.read<OnboardingCubit>().setOnboardingDone();
   }
 
   @override
@@ -29,16 +44,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     super.initState();
 
     /// Add your widget tabs here
-    _tabs = [
-      LastOnboarding(
-        onEndTap: onFinishOnboarding,
-      ),
-    ];
+    _tabs = [LastOnboarding(onEndTap: onFinishOnboarding)];
 
-    _tabController = TabController(
-      length: _tabs.length,
-      vsync: this,
-    );
+    _tabController = TabController(length: _tabs.length, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_tabs.isEmpty) {
         onFinishOnboarding();
@@ -59,16 +67,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         child: Column(
           children: [
             Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: _tabs,
-              ),
+              child: TabBarView(controller: _tabController, children: _tabs),
             ),
             const SizedBox(height: 4),
-            TabPageSelector(
-              controller: _tabController,
-              indicatorSize: 6,
-            ),
+            TabPageSelector(controller: _tabController, indicatorSize: 6),
           ],
         ),
       ),
