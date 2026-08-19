@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- String get id;
+ String get id; String get displayName;@JsonKey(includeToJson: false) bool get isVip;@JsonKey(includeToJson: false, includeFromJson: false) bool get isAnonymous;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.isVip, isVip) || other.isVip == isVip)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => Object.hash(runtimeType,id,displayName,isVip,isAnonymous);
 
 @override
 String toString() {
-  return 'User(id: $id)';
+  return 'User(id: $id, displayName: $displayName, isVip: $isVip, isAnonymous: $isAnonymous)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String id
+ String id, String displayName,@JsonKey(includeToJson: false) bool isVip,@JsonKey(includeToJson: false, includeFromJson: false) bool isAnonymous
 });
 
 
@@ -65,10 +65,13 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? displayName = null,Object? isVip = null,Object? isAnonymous = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,
+as String,displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
+as String,isVip: null == isVip ? _self.isVip : isVip // ignore: cast_nullable_to_non_nullable
+as bool,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -153,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String displayName, @JsonKey(includeToJson: false)  bool isVip, @JsonKey(includeToJson: false, includeFromJson: false)  bool isAnonymous)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.id);case _:
+return $default(_that.id,_that.displayName,_that.isVip,_that.isAnonymous);case _:
   return orElse();
 
 }
@@ -174,10 +177,10 @@ return $default(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String displayName, @JsonKey(includeToJson: false)  bool isVip, @JsonKey(includeToJson: false, includeFromJson: false)  bool isAnonymous)  $default,) {final _that = this;
 switch (_that) {
 case _User():
-return $default(_that.id);case _:
+return $default(_that.id,_that.displayName,_that.isVip,_that.isAnonymous);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +197,10 @@ return $default(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String displayName, @JsonKey(includeToJson: false)  bool isVip, @JsonKey(includeToJson: false, includeFromJson: false)  bool isAnonymous)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.id);case _:
+return $default(_that.id,_that.displayName,_that.isVip,_that.isAnonymous);case _:
   return null;
 
 }
@@ -209,10 +212,13 @@ return $default(_that.id);case _:
 @JsonSerializable()
 
 class _User implements User {
-  const _User({required this.id});
+  const _User({required this.id, required this.displayName, @JsonKey(includeToJson: false) this.isVip = false, @JsonKey(includeToJson: false, includeFromJson: false) this.isAnonymous = false});
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override final  String id;
+@override final  String displayName;
+@override@JsonKey(includeToJson: false) final  bool isVip;
+@override@JsonKey(includeToJson: false, includeFromJson: false) final  bool isAnonymous;
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.isVip, isVip) || other.isVip == isVip)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => Object.hash(runtimeType,id,displayName,isVip,isAnonymous);
 
 @override
 String toString() {
-  return 'User(id: $id)';
+  return 'User(id: $id, displayName: $displayName, isVip: $isVip, isAnonymous: $isAnonymous)';
 }
 
 
@@ -247,7 +253,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String id
+ String id, String displayName,@JsonKey(includeToJson: false) bool isVip,@JsonKey(includeToJson: false, includeFromJson: false) bool isAnonymous
 });
 
 
@@ -264,10 +270,13 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? displayName = null,Object? isVip = null,Object? isAnonymous = null,}) {
   return _then(_User(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,
+as String,displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
+as String,isVip: null == isVip ? _self.isVip : isVip // ignore: cast_nullable_to_non_nullable
+as bool,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

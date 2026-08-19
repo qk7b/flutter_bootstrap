@@ -1,16 +1,40 @@
 {
   "appName": "Flutter Bootstrap",
-  "errors": {
-    
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "cancel": "Annuler",
+    "continueLabel": "Continuer"
+  },
+  "onboarding": {
+    "step(context=int,total=int)": "Étape ${context} sur ${total}",
+    "step1": {
+      "title": "Bienvenue dans Flutter Bootstrap",
+      "subtitle": "L'application de démarrage Flutter ultime",
+      "tooltip": "Cette application est conçue pour vous aider à démarrer rapidement avec Flutter.",
+      "continueButton": "Continuer"
+    }
+  },
+  "tos": {
+    "intro": {
+      "using": "En utilisant cette application, vous acceptez nos",
+      "buying": "En souscrivant à cette application, vous acceptez nos"
+    },
+    "tos": "Termes et Conditions",
+    "also": "ainsi que notre",
+    "privacy": "Politique de confidentialité"
   },
   "login": {
     "loginTitle": "Connexion",
+    "loginSubtitle": "Connectez-vous pour continuer",
     "login": "Connexion",
     "socials": {
       "google": "Continuer avec Google",
       "apple": "Continuer avec Apple"
     },
-    "anonymous": "Continuer sans compte"
+    "anonymous": "Continuer sans compte",
+    "termsAgreement": "En continuant, vous acceptez nos "
   },
   "subscriptions": {
     "duration": {
@@ -39,6 +63,57 @@
         "one": "An",
         "other": "Ans"
       }
+    },
+    "intro": {
+      "zero": "Commencez avec ${time} ${period} gratuitement",
+      "other": "Commencez avec ${time} ${period} pour ${n}"
+    },
+    "cancelation": {
+      "title": "Les abonnements sont renouvelés automatiquement et gérés par ${provider}. Vous pouvez les annuler à tout moment depuis réglages d'abonnement de ${provider}.",
+      "provider": {
+        "google": "Google Play",
+        "apple": "App Store"
+      },
+      "manageLabel": "Gérer mon abonnement"
+    }
+  },
+  "settings": {
+    "account": "Compte",
+    "preferences": "Préférences",
+    "support": "Support",
+    "debug": "Debug",
+    "restorePurchases": "Restaurer les achats",
+    "contactUs": "Contactez-nous",
+    "termsOfService": "Conditions d'utilisation",
+    "privacyPolicy": "Politique de confidentialité",
+    "licenses": "Licences",
+    "onboarding": "Onboarding",
+    "restorePurchaseSuccess": "Restauration de l'achat réussie !",
+    "theme": {
+      "label": "Thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    },
+    "premium": {
+      "youArePremiumUser": "Vous êtes un utilisateur premium",
+      "manageSubscription": "Gérer l'abonnement",
+      "upgradeTitle": "Passez en premium pour débloquer toutes les fonctionnalités",
+      "upgradeNow": "Passer en premium"
+    },
+    "deleteMyAccount": {
+      "title": "Supprimer mon compte",
+      "confirmTitle": "Voulez-vous vraiment supprimer votre compte ?",
+      "confirmSubtitle": "Cette action est irréversible et supprimera toutes vos données.",
+      "cancel": "Annuler",
+      "confirm": "Supprimer mon compte",
+      "premiumWarningTitle": "Vous êtes un utilisateur premium",
+      "premiumWarningSubtitle": "Annuler votre abonnement avant de supprimer votre compte pour éviter d'être facturé à nouveau, les abonnements sont gérés par ${provider}.",
+      "confirmAnyway": "Supprimer quand même"
+    },
+    "analytics": {
+      "label": "Collecte de données anonymes",
+      "description": "Nous collectons des données d'utilisation anonymes pour améliorer l'application. Vous pouvez modifier ce paramètre à tout moment."
     }
   }
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettingsState {
 
- AppTheme get theme;
+ ThemeMode get theme;@JsonKey(includeToJson: false, includeFromJson: false) bool get areAnalyticsAuthorized;
 /// Create a copy of AppSettingsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AppSettingsStateCopyWith<AppSettingsState> get copyWith => _$AppSettingsStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettingsState&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettingsState&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.areAnalyticsAuthorized, areAnalyticsAuthorized) || other.areAnalyticsAuthorized == areAnalyticsAuthorized));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,theme);
+int get hashCode => Object.hash(runtimeType,theme,areAnalyticsAuthorized);
 
 @override
 String toString() {
-  return 'AppSettingsState(theme: $theme)';
+  return 'AppSettingsState(theme: $theme, areAnalyticsAuthorized: $areAnalyticsAuthorized)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AppSettingsStateCopyWith<$Res>  {
   factory $AppSettingsStateCopyWith(AppSettingsState value, $Res Function(AppSettingsState) _then) = _$AppSettingsStateCopyWithImpl;
 @useResult
 $Res call({
- AppTheme theme
+ ThemeMode theme,@JsonKey(includeToJson: false, includeFromJson: false) bool areAnalyticsAuthorized
 });
 
 
@@ -65,10 +65,11 @@ class _$AppSettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of AppSettingsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? theme = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? theme = null,Object? areAnalyticsAuthorized = null,}) {
   return _then(_self.copyWith(
 theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as AppTheme,
+as ThemeMode,areAnalyticsAuthorized: null == areAnalyticsAuthorized ? _self.areAnalyticsAuthorized : areAnalyticsAuthorized // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AppTheme theme)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode theme, @JsonKey(includeToJson: false, includeFromJson: false)  bool areAnalyticsAuthorized)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettingsState() when $default != null:
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.areAnalyticsAuthorized);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AppTheme theme)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode theme, @JsonKey(includeToJson: false, includeFromJson: false)  bool areAnalyticsAuthorized)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettingsState():
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.areAnalyticsAuthorized);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AppTheme theme)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode theme, @JsonKey(includeToJson: false, includeFromJson: false)  bool areAnalyticsAuthorized)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettingsState() when $default != null:
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.areAnalyticsAuthorized);case _:
   return null;
 
 }
@@ -209,10 +210,11 @@ return $default(_that.theme);case _:
 @JsonSerializable()
 
 class _AppSettingsState implements AppSettingsState {
-  const _AppSettingsState({this.theme = AppTheme.system});
+  const _AppSettingsState({this.theme = ThemeMode.system, @JsonKey(includeToJson: false, includeFromJson: false) this.areAnalyticsAuthorized = true});
   factory _AppSettingsState.fromJson(Map<String, dynamic> json) => _$AppSettingsStateFromJson(json);
 
-@override@JsonKey() final  AppTheme theme;
+@override@JsonKey() final  ThemeMode theme;
+@override@JsonKey(includeToJson: false, includeFromJson: false) final  bool areAnalyticsAuthorized;
 
 /// Create a copy of AppSettingsState
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +229,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettingsState&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettingsState&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.areAnalyticsAuthorized, areAnalyticsAuthorized) || other.areAnalyticsAuthorized == areAnalyticsAuthorized));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,theme);
+int get hashCode => Object.hash(runtimeType,theme,areAnalyticsAuthorized);
 
 @override
 String toString() {
-  return 'AppSettingsState(theme: $theme)';
+  return 'AppSettingsState(theme: $theme, areAnalyticsAuthorized: $areAnalyticsAuthorized)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$AppSettingsStateCopyWith<$Res> implements $AppSettingsSta
   factory _$AppSettingsStateCopyWith(_AppSettingsState value, $Res Function(_AppSettingsState) _then) = __$AppSettingsStateCopyWithImpl;
 @override @useResult
 $Res call({
- AppTheme theme
+ ThemeMode theme,@JsonKey(includeToJson: false, includeFromJson: false) bool areAnalyticsAuthorized
 });
 
 
@@ -264,10 +266,11 @@ class __$AppSettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of AppSettingsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? theme = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? theme = null,Object? areAnalyticsAuthorized = null,}) {
   return _then(_AppSettingsState(
 theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as AppTheme,
+as ThemeMode,areAnalyticsAuthorized: null == areAnalyticsAuthorized ? _self.areAnalyticsAuthorized : areAnalyticsAuthorized // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

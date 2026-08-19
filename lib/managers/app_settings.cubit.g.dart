@@ -9,15 +9,15 @@ part of 'app_settings.cubit.dart';
 _AppSettingsState _$AppSettingsStateFromJson(Map<String, dynamic> json) =>
     _AppSettingsState(
       theme:
-          $enumDecodeNullable(_$AppThemeEnumMap, json['theme']) ??
-          AppTheme.system,
+          $enumDecodeNullable(_$ThemeModeEnumMap, json['theme']) ??
+          ThemeMode.system,
     );
 
 Map<String, dynamic> _$AppSettingsStateToJson(_AppSettingsState instance) =>
-    <String, dynamic>{'theme': _$AppThemeEnumMap[instance.theme]!};
+    <String, dynamic>{'theme': _$ThemeModeEnumMap[instance.theme]!};
 
-const _$AppThemeEnumMap = {
-  AppTheme.system: 'system',
-  AppTheme.dark: 'dark',
-  AppTheme.light: 'light',
+const _$ThemeModeEnumMap = {
+  ThemeMode.system: 'system',
+  ThemeMode.dark: 'dark',
+  ThemeMode.light: 'light',
 };

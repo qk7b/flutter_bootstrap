@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bootstrap_app/views/login/widgets/social_sign_in_buttons.dart';
+import 'package:flutter_bootstrap_app/theme.dart';
+import 'package:flutter_bootstrap_app/views/login/widgets/login_wall.dart';
+import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginWallScreen extends StatelessWidget {
+  const LoginWallScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 8,
-          children: [
-            GoogleSignInButton(),
-            AppleSignInButton(),
-            AnonymousSignInButton(),
-          ],
+    return Scaffold(
+      appBar: AppBar(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppTheme.spacingMedium),
+          child: LoginWall(
+            onLoginSuccess: () => context.pop(true),
+            allowAnonymousSignIn: false,
+          ),
         ),
       ),
     );

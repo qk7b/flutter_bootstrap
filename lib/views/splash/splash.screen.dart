@@ -1,38 +1,29 @@
+import 'package:bloc_wrapped_values/bloc_wrapped_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bootstrap_app/gen/strings.g.dart';
 import 'package:flutter_bootstrap_app/main.dart';
-import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
+import 'package:flutter_bootstrap_app/managers/current_user.cubit.dart';
+import 'package:flutter_bootstrap_app/models/user.model.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<StatefulWidget> createState() => SplasScreenState();
-}
-
-class SplasScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<OnboardingCubit>().trigger();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<OnboardingCubit, OnboardingState>(
+      body: BlocListener<CurrentUserCubit, AsyncValueWrapper<User?>>(
         listener: (_, state) {
-          if (state.hasOnboarded) {
-            context.goAppRoute(AppRoute.login);
+          if (state.status == AsyncValueStatus.initial) return;
+          if (state.value == null) {
+            context.goAppRoute(AppRoute.onboardingStep1);
             return;
           }
 
-          // Go to onboarding
-          context.goAppRoute(AppRoute.onboarding);
+          // Go to home
+          context.goAppRoute(AppRoute.home);
         },
-        child: const Center(child: Text('SplashScreen')),
+        child: Center(child: Text(context.t.common.loading)),
       ),
     );
   }

@@ -12,9 +12,9 @@ part of 'purchases_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$PurchasesState {
+mixin _$PurchasesState implements DiagnosticableTreeMixin {
 
- AsyncValueWrapper<Offerings> get offerings; Map<String, EntitlementInfo> get activeEntitlements; Package? get basketSelectedPackage;
+ AsyncValueWrapper<List<Package>> get packages; Package? get basketSelectedPackage; Map<String, EntitlementInfo> get activeEntitlements; AsyncValueWrapper<void> get buyStatus; bool get vipStatus;
 /// Create a copy of PurchasesState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -22,19 +22,25 @@ mixin _$PurchasesState {
 $PurchasesStateCopyWith<PurchasesState> get copyWith => _$PurchasesStateCopyWithImpl<PurchasesState>(this as PurchasesState, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'PurchasesState'))
+    ..add(DiagnosticsProperty('packages', packages))..add(DiagnosticsProperty('basketSelectedPackage', basketSelectedPackage))..add(DiagnosticsProperty('activeEntitlements', activeEntitlements))..add(DiagnosticsProperty('buyStatus', buyStatus))..add(DiagnosticsProperty('vipStatus', vipStatus));
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchasesState&&(identical(other.offerings, offerings) || other.offerings == offerings)&&const DeepCollectionEquality().equals(other.activeEntitlements, activeEntitlements)&&(identical(other.basketSelectedPackage, basketSelectedPackage) || other.basketSelectedPackage == basketSelectedPackage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchasesState&&(identical(other.packages, packages) || other.packages == packages)&&(identical(other.basketSelectedPackage, basketSelectedPackage) || other.basketSelectedPackage == basketSelectedPackage)&&const DeepCollectionEquality().equals(other.activeEntitlements, activeEntitlements)&&(identical(other.buyStatus, buyStatus) || other.buyStatus == buyStatus)&&(identical(other.vipStatus, vipStatus) || other.vipStatus == vipStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,offerings,const DeepCollectionEquality().hash(activeEntitlements),basketSelectedPackage);
+int get hashCode => Object.hash(runtimeType,packages,basketSelectedPackage,const DeepCollectionEquality().hash(activeEntitlements),buyStatus,vipStatus);
 
 @override
-String toString() {
-  return 'PurchasesState(offerings: $offerings, activeEntitlements: $activeEntitlements, basketSelectedPackage: $basketSelectedPackage)';
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'PurchasesState(packages: $packages, basketSelectedPackage: $basketSelectedPackage, activeEntitlements: $activeEntitlements, buyStatus: $buyStatus, vipStatus: $vipStatus)';
 }
 
 
@@ -45,7 +51,7 @@ abstract mixin class $PurchasesStateCopyWith<$Res>  {
   factory $PurchasesStateCopyWith(PurchasesState value, $Res Function(PurchasesState) _then) = _$PurchasesStateCopyWithImpl;
 @useResult
 $Res call({
- AsyncValueWrapper<Offerings> offerings, Map<String, EntitlementInfo> activeEntitlements, Package? basketSelectedPackage
+ AsyncValueWrapper<List<Package>> packages, Package? basketSelectedPackage, Map<String, EntitlementInfo> activeEntitlements, AsyncValueWrapper<void> buyStatus, bool vipStatus
 });
 
 
@@ -62,12 +68,14 @@ class _$PurchasesStateCopyWithImpl<$Res>
 
 /// Create a copy of PurchasesState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? offerings = null,Object? activeEntitlements = null,Object? basketSelectedPackage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? packages = null,Object? basketSelectedPackage = freezed,Object? activeEntitlements = null,Object? buyStatus = null,Object? vipStatus = null,}) {
   return _then(_self.copyWith(
-offerings: null == offerings ? _self.offerings : offerings // ignore: cast_nullable_to_non_nullable
-as AsyncValueWrapper<Offerings>,activeEntitlements: null == activeEntitlements ? _self.activeEntitlements : activeEntitlements // ignore: cast_nullable_to_non_nullable
-as Map<String, EntitlementInfo>,basketSelectedPackage: freezed == basketSelectedPackage ? _self.basketSelectedPackage : basketSelectedPackage // ignore: cast_nullable_to_non_nullable
-as Package?,
+packages: null == packages ? _self.packages : packages // ignore: cast_nullable_to_non_nullable
+as AsyncValueWrapper<List<Package>>,basketSelectedPackage: freezed == basketSelectedPackage ? _self.basketSelectedPackage : basketSelectedPackage // ignore: cast_nullable_to_non_nullable
+as Package?,activeEntitlements: null == activeEntitlements ? _self.activeEntitlements : activeEntitlements // ignore: cast_nullable_to_non_nullable
+as Map<String, EntitlementInfo>,buyStatus: null == buyStatus ? _self.buyStatus : buyStatus // ignore: cast_nullable_to_non_nullable
+as AsyncValueWrapper<void>,vipStatus: null == vipStatus ? _self.vipStatus : vipStatus // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -152,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AsyncValueWrapper<Offerings> offerings,  Map<String, EntitlementInfo> activeEntitlements,  Package? basketSelectedPackage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AsyncValueWrapper<List<Package>> packages,  Package? basketSelectedPackage,  Map<String, EntitlementInfo> activeEntitlements,  AsyncValueWrapper<void> buyStatus,  bool vipStatus)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PurchasesState() when $default != null:
-return $default(_that.offerings,_that.activeEntitlements,_that.basketSelectedPackage);case _:
+return $default(_that.packages,_that.basketSelectedPackage,_that.activeEntitlements,_that.buyStatus,_that.vipStatus);case _:
   return orElse();
 
 }
@@ -173,10 +181,10 @@ return $default(_that.offerings,_that.activeEntitlements,_that.basketSelectedPac
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AsyncValueWrapper<Offerings> offerings,  Map<String, EntitlementInfo> activeEntitlements,  Package? basketSelectedPackage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AsyncValueWrapper<List<Package>> packages,  Package? basketSelectedPackage,  Map<String, EntitlementInfo> activeEntitlements,  AsyncValueWrapper<void> buyStatus,  bool vipStatus)  $default,) {final _that = this;
 switch (_that) {
 case _PurchasesState():
-return $default(_that.offerings,_that.activeEntitlements,_that.basketSelectedPackage);case _:
+return $default(_that.packages,_that.basketSelectedPackage,_that.activeEntitlements,_that.buyStatus,_that.vipStatus);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +201,10 @@ return $default(_that.offerings,_that.activeEntitlements,_that.basketSelectedPac
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AsyncValueWrapper<Offerings> offerings,  Map<String, EntitlementInfo> activeEntitlements,  Package? basketSelectedPackage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AsyncValueWrapper<List<Package>> packages,  Package? basketSelectedPackage,  Map<String, EntitlementInfo> activeEntitlements,  AsyncValueWrapper<void> buyStatus,  bool vipStatus)?  $default,) {final _that = this;
 switch (_that) {
 case _PurchasesState() when $default != null:
-return $default(_that.offerings,_that.activeEntitlements,_that.basketSelectedPackage);case _:
+return $default(_that.packages,_that.basketSelectedPackage,_that.activeEntitlements,_that.buyStatus,_that.vipStatus);case _:
   return null;
 
 }
@@ -207,11 +215,12 @@ return $default(_that.offerings,_that.activeEntitlements,_that.basketSelectedPac
 /// @nodoc
 
 
-class _PurchasesState implements PurchasesState {
-  const _PurchasesState({required this.offerings, final  Map<String, EntitlementInfo> activeEntitlements = const {}, this.basketSelectedPackage}): _activeEntitlements = activeEntitlements;
+class _PurchasesState with DiagnosticableTreeMixin implements PurchasesState {
+  const _PurchasesState({required this.packages, this.basketSelectedPackage, final  Map<String, EntitlementInfo> activeEntitlements = const {}, this.buyStatus = const AsyncValueWrapper(), this.vipStatus = false}): _activeEntitlements = activeEntitlements;
   
 
-@override final  AsyncValueWrapper<Offerings> offerings;
+@override final  AsyncValueWrapper<List<Package>> packages;
+@override final  Package? basketSelectedPackage;
  final  Map<String, EntitlementInfo> _activeEntitlements;
 @override@JsonKey() Map<String, EntitlementInfo> get activeEntitlements {
   if (_activeEntitlements is EqualUnmodifiableMapView) return _activeEntitlements;
@@ -219,7 +228,8 @@ class _PurchasesState implements PurchasesState {
   return EqualUnmodifiableMapView(_activeEntitlements);
 }
 
-@override final  Package? basketSelectedPackage;
+@override@JsonKey() final  AsyncValueWrapper<void> buyStatus;
+@override@JsonKey() final  bool vipStatus;
 
 /// Create a copy of PurchasesState
 /// with the given fields replaced by the non-null parameter values.
@@ -228,19 +238,25 @@ class _PurchasesState implements PurchasesState {
 _$PurchasesStateCopyWith<_PurchasesState> get copyWith => __$PurchasesStateCopyWithImpl<_PurchasesState>(this, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'PurchasesState'))
+    ..add(DiagnosticsProperty('packages', packages))..add(DiagnosticsProperty('basketSelectedPackage', basketSelectedPackage))..add(DiagnosticsProperty('activeEntitlements', activeEntitlements))..add(DiagnosticsProperty('buyStatus', buyStatus))..add(DiagnosticsProperty('vipStatus', vipStatus));
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchasesState&&(identical(other.offerings, offerings) || other.offerings == offerings)&&const DeepCollectionEquality().equals(other._activeEntitlements, _activeEntitlements)&&(identical(other.basketSelectedPackage, basketSelectedPackage) || other.basketSelectedPackage == basketSelectedPackage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchasesState&&(identical(other.packages, packages) || other.packages == packages)&&(identical(other.basketSelectedPackage, basketSelectedPackage) || other.basketSelectedPackage == basketSelectedPackage)&&const DeepCollectionEquality().equals(other._activeEntitlements, _activeEntitlements)&&(identical(other.buyStatus, buyStatus) || other.buyStatus == buyStatus)&&(identical(other.vipStatus, vipStatus) || other.vipStatus == vipStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,offerings,const DeepCollectionEquality().hash(_activeEntitlements),basketSelectedPackage);
+int get hashCode => Object.hash(runtimeType,packages,basketSelectedPackage,const DeepCollectionEquality().hash(_activeEntitlements),buyStatus,vipStatus);
 
 @override
-String toString() {
-  return 'PurchasesState(offerings: $offerings, activeEntitlements: $activeEntitlements, basketSelectedPackage: $basketSelectedPackage)';
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'PurchasesState(packages: $packages, basketSelectedPackage: $basketSelectedPackage, activeEntitlements: $activeEntitlements, buyStatus: $buyStatus, vipStatus: $vipStatus)';
 }
 
 
@@ -251,7 +267,7 @@ abstract mixin class _$PurchasesStateCopyWith<$Res> implements $PurchasesStateCo
   factory _$PurchasesStateCopyWith(_PurchasesState value, $Res Function(_PurchasesState) _then) = __$PurchasesStateCopyWithImpl;
 @override @useResult
 $Res call({
- AsyncValueWrapper<Offerings> offerings, Map<String, EntitlementInfo> activeEntitlements, Package? basketSelectedPackage
+ AsyncValueWrapper<List<Package>> packages, Package? basketSelectedPackage, Map<String, EntitlementInfo> activeEntitlements, AsyncValueWrapper<void> buyStatus, bool vipStatus
 });
 
 
@@ -268,12 +284,14 @@ class __$PurchasesStateCopyWithImpl<$Res>
 
 /// Create a copy of PurchasesState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? offerings = null,Object? activeEntitlements = null,Object? basketSelectedPackage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? packages = null,Object? basketSelectedPackage = freezed,Object? activeEntitlements = null,Object? buyStatus = null,Object? vipStatus = null,}) {
   return _then(_PurchasesState(
-offerings: null == offerings ? _self.offerings : offerings // ignore: cast_nullable_to_non_nullable
-as AsyncValueWrapper<Offerings>,activeEntitlements: null == activeEntitlements ? _self._activeEntitlements : activeEntitlements // ignore: cast_nullable_to_non_nullable
-as Map<String, EntitlementInfo>,basketSelectedPackage: freezed == basketSelectedPackage ? _self.basketSelectedPackage : basketSelectedPackage // ignore: cast_nullable_to_non_nullable
-as Package?,
+packages: null == packages ? _self.packages : packages // ignore: cast_nullable_to_non_nullable
+as AsyncValueWrapper<List<Package>>,basketSelectedPackage: freezed == basketSelectedPackage ? _self.basketSelectedPackage : basketSelectedPackage // ignore: cast_nullable_to_non_nullable
+as Package?,activeEntitlements: null == activeEntitlements ? _self._activeEntitlements : activeEntitlements // ignore: cast_nullable_to_non_nullable
+as Map<String, EntitlementInfo>,buyStatus: null == buyStatus ? _self.buyStatus : buyStatus // ignore: cast_nullable_to_non_nullable
+as AsyncValueWrapper<void>,vipStatus: null == vipStatus ? _self.vipStatus : vipStatus // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

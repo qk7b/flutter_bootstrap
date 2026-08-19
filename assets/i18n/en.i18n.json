@@ -1,14 +1,40 @@
 {
   "appName": "Flutter Bootstrap",
-  "errors": {},
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "continueLabel": "Continue"
+  },
+  "onboarding": {
+    "step(context=int,total=int)": "Step ${context} of ${total}",
+    "step1": {
+      "title": "Welcome to Flutter Bootstrap",
+      "subtitle": "The ultimate Flutter starter app",
+      "tooltip": "This app is designed to help you get started quickly with Flutter.",
+      "continueButton": "Continue"
+    }
+  },
+  "tos": {
+    "intro": {
+      "using": "By using this app, you agree to our",
+      "buying": "By subscribing to this app, you agree to our"
+    },
+    "tos": "Terms and Conditions",
+    "also": "and our",
+    "privacy": "Privacy Policy"
+  },
   "login": {
     "loginTitle": "Login",
+    "loginSubtitle": "Log in to continue",
     "login": "Login",
     "socials": {
       "google": "Continue with Google",
       "apple": "Continue with Apple"
     },
-    "anonymous": "Continue without account"
+    "anonymous": "Continue without account",
+    "termsAgreement": "By continuing, you agree to our "
   },
   "subscriptions": {
     "duration": {
@@ -37,6 +63,57 @@
         "one": "Year",
         "other": "Years"
       }
+    },
+    "intro": {
+      "zero": "Start with ${time} ${period} for free",
+      "other": "Start with ${time} ${period} for ${n}"
+    },
+    "cancelation": {
+      "title": "Subscriptions renew automatically and are managed by ${provider}. You can cancel anytime in your ${provider} subscription settings.",
+      "provider": {
+        "google": "Google Play",
+        "apple": "App Store"
+      },
+      "manageLabel": "Manage my subscription"
+    }
+  },
+  "settings": {
+    "account": "Account",
+    "preferences": "Preferences",
+    "support": "Support",
+    "debug": "Debug",
+    "restorePurchases": "Restore purchases",
+    "contactUs": "Contact us",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "licenses": "Licenses",
+    "onboarding": "Onboarding",
+    "restorePurchaseSuccess": "Restore purchase successful!",
+    "theme": {
+      "label": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "premium": {
+      "youArePremiumUser": "You are a premium user",
+      "manageSubscription": "Manage subscription",
+      "upgradeTitle": "Upgrade to premium to unlock all features",
+      "upgradeNow": "Upgrade Now"
+    },
+    "deleteMyAccount": {
+      "title": "Delete my account",
+      "confirmTitle": "Are you sure you want to delete your account?",
+      "confirmSubtitle": "This action is irreversible and will delete all your data.",
+      "cancel": "Cancel",
+      "confirm": "Delete my account",
+      "premiumWarningTitle": "You are a premium user",
+      "premiumWarningSubtitle": "Cancel your subscription before deleting your account to avoid being charged again, subscriptions are managed by ${provider}.",
+      "confirmAnyway": "Delete anyway"
+    },
+    "analytics": {
+      "label": "Anonymous analytics",
+      "description": "We collect anonymous usage data to improve the app. You can change this setting at any time."
     }
   }
 }

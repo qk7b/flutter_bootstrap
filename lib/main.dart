@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,10 +14,13 @@ import 'package:flutter_bootstrap_app/managers/app_settings.cubit.dart';
 import 'package:flutter_bootstrap_app/managers/current_user.cubit.dart';
 import 'package:flutter_bootstrap_app/managers/onboarding_cubit.dart';
 import 'package:flutter_bootstrap_app/managers/purchases_cubit.dart';
+import 'package:flutter_bootstrap_app/repositories/analytics/analytics.repository.dart';
 import 'package:flutter_bootstrap_app/views/home/home.screen.dart';
 import 'package:flutter_bootstrap_app/views/login/login.screen.dart';
 import 'package:flutter_bootstrap_app/views/onboarding/onboarding.screen.dart';
+import 'package:flutter_bootstrap_app/views/onboarding/widgets/onboarding_step_1.screen.dart';
 import 'package:flutter_bootstrap_app/views/paywall/paywall.screen.dart';
+import 'package:flutter_bootstrap_app/views/settings/settings.screen.dart';
 import 'package:flutter_bootstrap_app/views/splash/splash.screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +31,6 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:toastification/toastification.dart';
 
 part 'router.dart';
-
 
 void main() async {
   // Init
@@ -49,6 +52,18 @@ void main() async {
   await configureDependencies();
   // Payment provider
   await initPaymentProvider();
+
+  // Crashlytics
+  // Pass all uncaught "fatal" errors from the framework to Crashlytics
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   // App
   logger.i('Starting app...');
   runApp(TranslationProvider(child: const MyApp()));
@@ -97,7 +112,6 @@ class MyApp extends StatelessWidget {
         BlocProvider.value(value: getIt<AppSettingsCubit>()),
         BlocProvider.value(value: getIt<CurrentUserCubit>()),
         BlocProvider.value(value: getIt<PurchasesCubit>()),
-        BlocProvider.value(value: getIt<OnboardingCubit>()),
       ],
       child: Builder(
         builder: (context) {

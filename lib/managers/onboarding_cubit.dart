@@ -1,30 +1,58 @@
+import 'dart:async';
+
+import 'package:bloc_wrapped_values/bloc_wrapped_values.dart';
+import 'package:flutter_bootstrap_app/interactor/app_event_bus.dart';
+import 'package:flutter_bootstrap_app/models/user.model.dart';
+import 'package:flutter_bootstrap_app/repositories/analytics/analytics.repository.dart';
+import 'package:flutter_bootstrap_app/repositories/user/user.repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 part 'onboarding_cubit.freezed.dart';
-part 'onboarding_cubit.g.dart';
-part 'onboarding_cubit.state.dart';
+
+@freezed
+abstract class OnboardingState with _$OnboardingState {
+  const factory OnboardingState({
+    User? originalUser,
+    @Default('') String userName,
+    @Default(AsyncValueWrapper(value: false))
+    AsyncValueWrapper<bool> finishOnboardingStatus,
+  }) = _OnboardingState;
+
+  factory OnboardingState.initial() => const OnboardingState();
+}
 
 @injectable
-class OnboardingCubit extends HydratedCubit<OnboardingState> {
-  OnboardingCubit() : super(const OnboardingState());
-
-  @override
-  String get storagePrefix => 'onboarding';
-
-  void trigger() {
-    emit(state.copyWith(loadedAt: DateTime.now()));
+class OnboardingCubit extends Cubit<OnboardingState> {
+  OnboardingCubit({
+    required AppEventBus appEventBus,
+    required AnalyticsRepository analyticsRepository,
+    required UserRepository userRepository,
+  }) : _userRepository = userRepository,
+       _analyticsRepository = analyticsRepository,
+       super(OnboardingState.initial()) {
+    _userLoadedSubscription = appEventBus.stream
+        .where((e) => e is UserLoadedAppEvent)
+        .cast<UserLoadedAppEvent>()
+        .listen((e) => emit(state.copyWith(originalUser: e.user)));
   }
+
+  final UserRepository _userRepository;
+  final AnalyticsRepository _analyticsRepository;
+  StreamSubscription<UserLoadedAppEvent>? _userLoadedSubscription;
 
   void setOnboardingDone() {
-    emit(state.copyWith(hasOnboarded: true, updatedAt: DateTime.now()));
+    throw UnimplementedError('setOnboardingDone is not implemented yet');
+  }
+
+  void setStepCompleted(int stepIndex, String screenTitle) {
+    _analyticsRepository.trackOnboardingStepCompleted(stepIndex, screenTitle);
   }
 
   @override
-  OnboardingState? fromJson(Map<String, dynamic> json) =>
-      OnboardingState.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(OnboardingState state) => state.toJson();
+  Future<void> close() {
+    _userLoadedSubscription?.cancel();
+    return super.close();
+  }
 }

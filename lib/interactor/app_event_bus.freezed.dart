@@ -122,10 +122,10 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String userId)?  userLoaded,TResult Function( AppError error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( User user)?  userLoaded,TResult Function( AppError error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case UserLoadedAppEvent() when userLoaded != null:
-return userLoaded(_that.userId);case ErrorOccuredAppEvent() when error != null:
+return userLoaded(_that.user);case ErrorOccuredAppEvent() when error != null:
 return error(_that.error);case _:
   return orElse();
 
@@ -144,10 +144,10 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String userId)  userLoaded,required TResult Function( AppError error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( User user)  userLoaded,required TResult Function( AppError error)  error,}) {final _that = this;
 switch (_that) {
 case UserLoadedAppEvent():
-return userLoaded(_that.userId);case ErrorOccuredAppEvent():
+return userLoaded(_that.user);case ErrorOccuredAppEvent():
 return error(_that.error);case _:
   throw StateError('Unexpected subclass');
 
@@ -165,10 +165,10 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String userId)?  userLoaded,TResult? Function( AppError error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( User user)?  userLoaded,TResult? Function( AppError error)?  error,}) {final _that = this;
 switch (_that) {
 case UserLoadedAppEvent() when userLoaded != null:
-return userLoaded(_that.userId);case ErrorOccuredAppEvent() when error != null:
+return userLoaded(_that.user);case ErrorOccuredAppEvent() when error != null:
 return error(_that.error);case _:
   return null;
 
@@ -181,10 +181,10 @@ return error(_that.error);case _:
 
 
 class UserLoadedAppEvent implements AppEvent {
-  const UserLoadedAppEvent(this.userId);
+  const UserLoadedAppEvent(this.user);
   
 
- final  String userId;
+ final  User user;
 
 /// Create a copy of AppEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -196,16 +196,16 @@ $UserLoadedAppEventCopyWith<UserLoadedAppEvent> get copyWith => _$UserLoadedAppE
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserLoadedAppEvent&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserLoadedAppEvent&&(identical(other.user, user) || other.user == user));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userId);
+int get hashCode => Object.hash(runtimeType,user);
 
 @override
 String toString() {
-  return 'AppEvent.userLoaded(userId: $userId)';
+  return 'AppEvent.userLoaded(user: $user)';
 }
 
 
@@ -216,11 +216,11 @@ abstract mixin class $UserLoadedAppEventCopyWith<$Res> implements $AppEventCopyW
   factory $UserLoadedAppEventCopyWith(UserLoadedAppEvent value, $Res Function(UserLoadedAppEvent) _then) = _$UserLoadedAppEventCopyWithImpl;
 @useResult
 $Res call({
- String userId
+ User user
 });
 
 
-
+$UserCopyWith<$Res> get user;
 
 }
 /// @nodoc
@@ -233,14 +233,23 @@ class _$UserLoadedAppEventCopyWithImpl<$Res>
 
 /// Create a copy of AppEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? userId = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? user = null,}) {
   return _then(UserLoadedAppEvent(
-null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,
+null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as User,
   ));
 }
 
-
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserCopyWith<$Res> get user {
+  
+  return $UserCopyWith<$Res>(_self.user, (value) {
+    return _then(_self.copyWith(user: value));
+  });
+}
 }
 
 /// @nodoc

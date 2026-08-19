@@ -19,3 +19,11 @@ targets:
           assets:
             exclude:
               - assets/i18n/*
+      # See https://pub.dev/packages/slang_build_runner#legacy-builder
+      slang_build_runner:
+        enabled: false
+      slang_build_runner:legacy:
+        enabled: true
+        options:
+          base_locale: en
+          

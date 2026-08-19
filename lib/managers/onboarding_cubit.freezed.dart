@@ -11,33 +11,30 @@ part of 'onboarding_cubit.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$OnboardingState {
 
- bool get hasOnboarded; DateTime? get updatedAt;@JsonKey(includeFromJson: false, includeToJson: false) DateTime? get loadedAt;
+ User? get originalUser; String get userName; AsyncValueWrapper<bool> get finishOnboardingStatus;
 /// Create a copy of OnboardingState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $OnboardingStateCopyWith<OnboardingState> get copyWith => _$OnboardingStateCopyWithImpl<OnboardingState>(this as OnboardingState, _$identity);
 
-  /// Serializes this OnboardingState to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingState&&(identical(other.hasOnboarded, hasOnboarded) || other.hasOnboarded == hasOnboarded)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.loadedAt, loadedAt) || other.loadedAt == loadedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingState&&(identical(other.originalUser, originalUser) || other.originalUser == originalUser)&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.finishOnboardingStatus, finishOnboardingStatus) || other.finishOnboardingStatus == finishOnboardingStatus));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,hasOnboarded,updatedAt,loadedAt);
+int get hashCode => Object.hash(runtimeType,originalUser,userName,finishOnboardingStatus);
 
 @override
 String toString() {
-  return 'OnboardingState(hasOnboarded: $hasOnboarded, updatedAt: $updatedAt, loadedAt: $loadedAt)';
+  return 'OnboardingState(originalUser: $originalUser, userName: $userName, finishOnboardingStatus: $finishOnboardingStatus)';
 }
 
 
@@ -48,11 +45,11 @@ abstract mixin class $OnboardingStateCopyWith<$Res>  {
   factory $OnboardingStateCopyWith(OnboardingState value, $Res Function(OnboardingState) _then) = _$OnboardingStateCopyWithImpl;
 @useResult
 $Res call({
- bool hasOnboarded, DateTime? updatedAt,@JsonKey(includeFromJson: false, includeToJson: false) DateTime? loadedAt
+ User? originalUser, String userName, AsyncValueWrapper<bool> finishOnboardingStatus
 });
 
 
-
+$UserCopyWith<$Res>? get originalUser;
 
 }
 /// @nodoc
@@ -65,15 +62,27 @@ class _$OnboardingStateCopyWithImpl<$Res>
 
 /// Create a copy of OnboardingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? hasOnboarded = null,Object? updatedAt = freezed,Object? loadedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? originalUser = freezed,Object? userName = null,Object? finishOnboardingStatus = null,}) {
   return _then(_self.copyWith(
-hasOnboarded: null == hasOnboarded ? _self.hasOnboarded : hasOnboarded // ignore: cast_nullable_to_non_nullable
-as bool,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,loadedAt: freezed == loadedAt ? _self.loadedAt : loadedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+originalUser: freezed == originalUser ? _self.originalUser : originalUser // ignore: cast_nullable_to_non_nullable
+as User?,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,finishOnboardingStatus: null == finishOnboardingStatus ? _self.finishOnboardingStatus : finishOnboardingStatus // ignore: cast_nullable_to_non_nullable
+as AsyncValueWrapper<bool>,
   ));
 }
+/// Create a copy of OnboardingState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserCopyWith<$Res>? get originalUser {
+    if (_self.originalUser == null) {
+    return null;
+  }
 
+  return $UserCopyWith<$Res>(_self.originalUser!, (value) {
+    return _then(_self.copyWith(originalUser: value));
+  });
+}
 }
 
 
@@ -155,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool hasOnboarded,  DateTime? updatedAt, @JsonKey(includeFromJson: false, includeToJson: false)  DateTime? loadedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( User? originalUser,  String userName,  AsyncValueWrapper<bool> finishOnboardingStatus)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OnboardingState() when $default != null:
-return $default(_that.hasOnboarded,_that.updatedAt,_that.loadedAt);case _:
+return $default(_that.originalUser,_that.userName,_that.finishOnboardingStatus);case _:
   return orElse();
 
 }
@@ -176,10 +185,10 @@ return $default(_that.hasOnboarded,_that.updatedAt,_that.loadedAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool hasOnboarded,  DateTime? updatedAt, @JsonKey(includeFromJson: false, includeToJson: false)  DateTime? loadedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( User? originalUser,  String userName,  AsyncValueWrapper<bool> finishOnboardingStatus)  $default,) {final _that = this;
 switch (_that) {
 case _OnboardingState():
-return $default(_that.hasOnboarded,_that.updatedAt,_that.loadedAt);case _:
+return $default(_that.originalUser,_that.userName,_that.finishOnboardingStatus);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +205,10 @@ return $default(_that.hasOnboarded,_that.updatedAt,_that.loadedAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool hasOnboarded,  DateTime? updatedAt, @JsonKey(includeFromJson: false, includeToJson: false)  DateTime? loadedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( User? originalUser,  String userName,  AsyncValueWrapper<bool> finishOnboardingStatus)?  $default,) {final _that = this;
 switch (_that) {
 case _OnboardingState() when $default != null:
-return $default(_that.hasOnboarded,_that.updatedAt,_that.loadedAt);case _:
+return $default(_that.originalUser,_that.userName,_that.finishOnboardingStatus);case _:
   return null;
 
 }
@@ -208,15 +217,15 @@ return $default(_that.hasOnboarded,_that.updatedAt,_that.loadedAt);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _OnboardingState implements OnboardingState {
-  const _OnboardingState({this.hasOnboarded = false, this.updatedAt, @JsonKey(includeFromJson: false, includeToJson: false) this.loadedAt});
-  factory _OnboardingState.fromJson(Map<String, dynamic> json) => _$OnboardingStateFromJson(json);
+  const _OnboardingState({this.originalUser, this.userName = '', this.finishOnboardingStatus = const AsyncValueWrapper(value: false)});
+  
 
-@override@JsonKey() final  bool hasOnboarded;
-@override final  DateTime? updatedAt;
-@override@JsonKey(includeFromJson: false, includeToJson: false) final  DateTime? loadedAt;
+@override final  User? originalUser;
+@override@JsonKey() final  String userName;
+@override@JsonKey() final  AsyncValueWrapper<bool> finishOnboardingStatus;
 
 /// Create a copy of OnboardingState
 /// with the given fields replaced by the non-null parameter values.
@@ -224,23 +233,20 @@ class _OnboardingState implements OnboardingState {
 @pragma('vm:prefer-inline')
 _$OnboardingStateCopyWith<_OnboardingState> get copyWith => __$OnboardingStateCopyWithImpl<_OnboardingState>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$OnboardingStateToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OnboardingState&&(identical(other.hasOnboarded, hasOnboarded) || other.hasOnboarded == hasOnboarded)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.loadedAt, loadedAt) || other.loadedAt == loadedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OnboardingState&&(identical(other.originalUser, originalUser) || other.originalUser == originalUser)&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.finishOnboardingStatus, finishOnboardingStatus) || other.finishOnboardingStatus == finishOnboardingStatus));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,hasOnboarded,updatedAt,loadedAt);
+int get hashCode => Object.hash(runtimeType,originalUser,userName,finishOnboardingStatus);
 
 @override
 String toString() {
-  return 'OnboardingState(hasOnboarded: $hasOnboarded, updatedAt: $updatedAt, loadedAt: $loadedAt)';
+  return 'OnboardingState(originalUser: $originalUser, userName: $userName, finishOnboardingStatus: $finishOnboardingStatus)';
 }
 
 
@@ -251,11 +257,11 @@ abstract mixin class _$OnboardingStateCopyWith<$Res> implements $OnboardingState
   factory _$OnboardingStateCopyWith(_OnboardingState value, $Res Function(_OnboardingState) _then) = __$OnboardingStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool hasOnboarded, DateTime? updatedAt,@JsonKey(includeFromJson: false, includeToJson: false) DateTime? loadedAt
+ User? originalUser, String userName, AsyncValueWrapper<bool> finishOnboardingStatus
 });
 
 
-
+@override $UserCopyWith<$Res>? get originalUser;
 
 }
 /// @nodoc
@@ -268,16 +274,28 @@ class __$OnboardingStateCopyWithImpl<$Res>
 
 /// Create a copy of OnboardingState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? hasOnboarded = null,Object? updatedAt = freezed,Object? loadedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? originalUser = freezed,Object? userName = null,Object? finishOnboardingStatus = null,}) {
   return _then(_OnboardingState(
-hasOnboarded: null == hasOnboarded ? _self.hasOnboarded : hasOnboarded // ignore: cast_nullable_to_non_nullable
-as bool,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,loadedAt: freezed == loadedAt ? _self.loadedAt : loadedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+originalUser: freezed == originalUser ? _self.originalUser : originalUser // ignore: cast_nullable_to_non_nullable
+as User?,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,finishOnboardingStatus: null == finishOnboardingStatus ? _self.finishOnboardingStatus : finishOnboardingStatus // ignore: cast_nullable_to_non_nullable
+as AsyncValueWrapper<bool>,
   ));
 }
 
+/// Create a copy of OnboardingState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserCopyWith<$Res>? get originalUser {
+    if (_self.originalUser == null) {
+    return null;
+  }
 
+  return $UserCopyWith<$Res>(_self.originalUser!, (value) {
+    return _then(_self.copyWith(originalUser: value));
+  });
+}
 }
 
 // dart format on

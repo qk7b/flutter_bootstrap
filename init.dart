@@ -1,4 +1,17 @@
 import 'dart:io';
+import 'dart:math';
+
+String _generateRandomPassword({int length = 20}) {
+  final random = Random.secure();
+  final List<int> charCodes = [];
+  const String chars =
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#%^&*()';
+
+  for (int i = 0; i < length; i++) {
+    charCodes.add(chars.codeUnitAt(random.nextInt(chars.length)));
+  }
+  return String.fromCharCodes(charCodes);
+}
 
 void main(List<String> args) {
   stdout.writeln('Hello there !\nLet\'s set this project up for you!');
@@ -37,6 +50,103 @@ void main(List<String> args) {
       'applicationId "$appIdentifier"',
     ),
   );
+
+  stdout.writeln(
+    'Would you like to generate an Android upload key for release builds? (y/n)',
+  );
+  final generateKeystore = stdin.readLineSync();
+  if (generateKeystore == 'y') {
+    final storePassword = _generateRandomPassword();
+    final keyPassword = _generateRandomPassword();
+    final keyAlias = appIdentifier;
+    final storeFile = 'android/app/upload-keystore.jks';
+
+    stdout.writeln('Please provide details for the certificate:');
+    final country = askString('Country Code (C, e.g., US):');
+    final state = askString('State or Province (S, e.g., California):');
+    final locality = askString('Locality (L, e.g., Mountain View):');
+    final organization = askString('Organization (O, e.g., Google Inc.):');
+    final organizationUnit = askString('Organizational Unit (OU, e.g., Android):');
+    final commonName = askString('Common Name (CN, e.g., Android Debug):');
+
+    stdout.writeln('Generating keystore...');
+    Process.runSync(
+      'keytool',
+      [
+        '-genkey',
+        '-v',
+        '-keystore',
+        storeFile,
+        '-alias',
+        keyAlias,
+        '-keyalg',
+        'RSA',
+        '-keysize',
+        '2048',
+        '-validity',
+        '10000',
+        '-storepass',
+        storePassword,
+        '-keypass',
+        keyPassword,
+        '-dname',
+        'CN=$commonName, OU=$organizationUnit, O=$organization, L=$locality, S=$state, C=$country',
+      ],
+    );
+    stdout.writeln('Keystore generated at $storeFile');
+
+    // Create key.properties file
+    final keyPropertiesContent =
+        '''
+  storePassword=$storePassword
+  keyPassword=$keyPassword
+  keyAlias=$keyAlias
+  storeFile=upload-keystore.jks
+  ''';
+    File('android/key.properties').writeAsStringSync(keyPropertiesContent);
+    stdout.writeln('android/key.properties created.');
+    // Update android/app/build.gradle
+    String buildGradleContent = buildGradle.readAsStringSync();
+
+    // Add keystore properties loading to the top of build.gradle
+    const propertiesLoadingBlock = """
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+""";
+    buildGradleContent = buildGradleContent.replaceAll('plugins {', 'plugins {\n$propertiesLoadingBlock\n');
+
+    const signingConfigBlock = """
+        signingConfigs {
+            release {
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    """;
+    buildGradleContent = buildGradleContent.replaceAll('android {', 'android {\n$signingConfigBlock');
+    buildGradleContent = buildGradleContent.replaceAll(
+      'signingConfig signingConfigs.debug',
+      '''            signingConfig signingConfigs.release''',
+    );
+
+    buildGradle.writeAsStringSync(buildGradleContent);
+    stdout.writeln(
+      'android/app/build.gradle updated with release signing config.',
+    );
+
+    // Update android/.gitignore
+    final androidGitignore = File('android/.gitignore');
+    androidGitignore.writeAsStringSync(
+      '${androidGitignore.readAsStringSync()}\n# Android Keystore files\nkey.properties\nupload-keystore.jks',
+      mode: FileMode.append,
+    );
+    stdout.writeln('android/.gitignore updated.');
+  }
 
   // For ios we need a correct bundle identifier with no _
   // First we uppercase each letter after a _ if they exist
@@ -171,3 +281,20 @@ String askPackageName() {
   stdout.writeln('Package name invalid. Please try again.');
   return askPackageName();
 }
+
+String askString(String prompt) {
+  stdout.writeln(prompt);
+  final value = stdin.readLineSync();
+  if (value == null || value.isEmpty) {
+    stdout.writeln('Input cannot be empty. Please try again.');
+    return askString(prompt);
+  }
+  stdout.writeln('You entered "$value", ok (y/n) ?');
+  final answer = stdin.readLineSync();
+  if (answer == 'y') {
+    return value;
+  }
+  stdout.writeln('Invalid input. Please try again.');
+  return askString(prompt);
+}
+
